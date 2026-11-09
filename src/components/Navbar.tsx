@@ -87,10 +87,41 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
             <Bot size={22} color="#060B18" strokeWidth={2.4} />
           </div>
           <div>
-            <div style={{ fontSize: '1.3rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              AGILLEX <span style={{ fontSize: '0.62rem', background: 'rgba(0, 245, 212, 0.15)', color: '#00F5D4', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(0, 245, 212, 0.3)', fontWeight: 700 }}>ECOSSISTEMA</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  fontFamily: "'Orbitron', 'Inter', sans-serif",
+                  fontSize: '1.42rem',
+                  fontWeight: 900,
+                  fontStyle: 'italic',
+                  letterSpacing: '0.04em',
+                  background: 'linear-gradient(95deg, #FFFFFF 20%, #00F5D4 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 10px rgba(0, 245, 212, 0.4))',
+                  transform: 'skewX(-6deg)',
+                  display: 'inline-block',
+                }}
+              >
+                AGILLEX
+              </span>
+              <span
+                style={{
+                  fontSize: '0.62rem',
+                  background: 'rgba(0, 245, 212, 0.15)',
+                  color: '#00F5D4',
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                  border: '1px solid rgba(0, 245, 212, 0.3)',
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                ECOSSISTEMA
+              </span>
             </div>
-            <div style={{ fontSize: '0.68rem', color: '#64748B', letterSpacing: '0.04em' }}>
+            <div style={{ fontSize: '0.68rem', color: '#64748B', letterSpacing: '0.04em', marginTop: '1px' }}>
               POR ALLLOGIC ONLINE
             </div>
           </div>

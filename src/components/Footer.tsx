@@ -39,7 +39,20 @@ export default function Footer() {
               >
                 <Bot size={20} color="#060B18" strokeWidth={2.5} />
               </div>
-              <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
+              <span
+                style={{
+                  fontFamily: "'Orbitron', 'Inter', sans-serif",
+                  fontSize: '1.25rem',
+                  fontWeight: 900,
+                  fontStyle: 'italic',
+                  letterSpacing: '0.04em',
+                  background: 'linear-gradient(95deg, #FFFFFF 20%, #00F5D4 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  transform: 'skewX(-6deg)',
+                  display: 'inline-block',
+                }}
+              >
                 AGILLEX
               </span>
             </div>
@@ -60,12 +73,12 @@ export default function Footer() {
               Família Agillex
             </div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <li><a href="#produtos" className="footer-link">Agillex Hub (Painel SaaS)</a></li>
-              <li><a href="#produtos" className="footer-link">Agilex Atende (WhatsApp IA)</a></li>
-              <li><a href="#produtos" className="footer-link">Agillex Agenda (Google Calendar)</a></li>
-              <li><a href="#produtos" className="footer-link">Agillex Cobrança (Pix R$ 1,99)</a></li>
-              <li><a href="#produtos" className="footer-link">Agillex Reputação (Google 5★)</a></li>
-              <li><a href="#produtos" className="footer-link">Agillex GED (Documentos com IA)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Hub (Painel SaaS)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agilex Atende (WhatsApp IA)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Agenda (Google Calendar)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Cobrança (Pix R$ 1,99)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Reputação (Google 5★)</a></li>
+              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex GED (Documentos com IA)</a></li>
             </ul>
           </div>
 
@@ -76,16 +89,42 @@ export default function Footer() {
             </div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <a href="https://hub.alllogiconline.com.br/login" target="_blank" rel="noopener noreferrer" className="footer-link">
+                <a
+                  href="https://hub.alllogiconline.com.br/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                  style={{ color: '#94A3B8', textDecoration: 'none' }}
+                >
                   <span>Entrar no Hub (Área do Cliente)</span>
                   <ExternalLink size={12} />
                 </a>
               </li>
-              <li><a href="#calculadora" className="footer-link">Calculadora de Retorno (ROI)</a></li>
-              <li><a href="#planos" className="footer-link">Planos & Preços</a></li>
-              <li><a href="#faq" className="footer-link">Perguntas Frequentes</a></li>
-              <li><Link href="/privacidade" className="footer-link">Política de Privacidade (LGPD)</Link></li>
-              <li><Link href="/termos" className="footer-link">Termos de Uso do Serviço</Link></li>
+              <li>
+                <a href="#calculadora" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                  Calculadora de Retorno (ROI)
+                </a>
+              </li>
+              <li>
+                <a href="#planos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                  Planos & Preços
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                  Perguntas Frequentes
+                </a>
+              </li>
+              <li>
+                <Link href="/privacidade" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                  Política de Privacidade (LGPD)
+                </Link>
+              </li>
+              <li>
+                <Link href="/termos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                  Termos de Uso do Serviço
+                </Link>
+              </li>
               <li>
                 <button
                   onClick={() => {
@@ -94,14 +133,10 @@ export default function Footer() {
                     }
                   }}
                   className="footer-link"
+                  style={{ color: '#94A3B8', textDecoration: 'none' }}
                 >
                   Preferências de Cookies
                 </button>
-              </li>
-              <li>
-                <a href="https://alllogiconline.com.br" target="_blank" rel="noopener noreferrer" className="footer-link">
-                  Site Institucional AllLogic Online
-                </a>
               </li>
             </ul>
           </div>
@@ -161,9 +196,15 @@ export default function Footer() {
       </div>
 
       <style jsx>{`
-        .footer-link {
-          color: #94A3B8;
-          text-decoration: none;
+        .footer-link,
+        .footer-link:visited,
+        .footer-link:active,
+        .footer-link:focus,
+        :global(a.footer-link),
+        :global(a.footer-link:visited),
+        :global(a.footer-link:active) {
+          color: #94A3B8 !important;
+          text-decoration: none !important;
           font-size: 0.84rem;
           background: none;
           border: none;
@@ -175,8 +216,9 @@ export default function Footer() {
           align-items: center;
           gap: 4px;
         }
-        .footer-link:hover {
-          color: #00F5D4;
+        .footer-link:hover,
+        :global(a.footer-link:hover) {
+          color: #00F5D4 !important;
         }
       `}</style>
     </footer>
