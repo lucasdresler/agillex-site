@@ -30,8 +30,8 @@ export default function BackToTop() {
       title="Voltar ao topo"
       style={{
         position: 'fixed',
-        bottom: '92px',
-        right: '26px',
+        bottom: '24px',
+        right: '24px',
         width: '44px',
         height: '44px',
         borderRadius: '50%',

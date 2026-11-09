@@ -47,7 +47,7 @@ export default function CookieConsent() {
       style={{
         position: 'fixed',
         bottom: '24px',
-        left: '24px',
+        right: '24px',
         maxWidth: '460px',
         width: 'calc(100% - 48px)',
         zIndex: 100,

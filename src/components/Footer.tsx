@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Bot, ShieldCheck, Heart, ExternalLink, Cookie } from 'lucide-react';
+import { Bot, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -59,29 +59,50 @@ export default function Footer() {
             <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '18px' }}>
               Família Agillex
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.84rem' }}>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Hub (Painel SaaS)</a></li>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agilex Atende (WhatsApp IA)</a></li>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Agenda (Google Calendar)</a></li>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Cobrança (Pix R$ 1,99)</a></li>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Reputação (Google 5★)</a></li>
-              <li><a href="#produtos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex GED (Documentos com IA)</a></li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <li><a href="#produtos" className="footer-link">Agillex Hub (Painel SaaS)</a></li>
+              <li><a href="#produtos" className="footer-link">Agilex Atende (WhatsApp IA)</a></li>
+              <li><a href="#produtos" className="footer-link">Agillex Agenda (Google Calendar)</a></li>
+              <li><a href="#produtos" className="footer-link">Agillex Cobrança (Pix R$ 1,99)</a></li>
+              <li><a href="#produtos" className="footer-link">Agillex Reputação (Google 5★)</a></li>
+              <li><a href="#produtos" className="footer-link">Agillex GED (Documentos com IA)</a></li>
             </ul>
           </div>
 
-          {/* Coluna 3: Links Úteis */}
+          {/* Coluna 3: Links Úteis / Acesso Rápido */}
           <div>
             <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '18px' }}>
               Acesso Rápido
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.84rem' }}>
-              <li><a href="https://hub.alllogiconline.com.br/login" target="_blank" rel="noopener noreferrer" style={{ color: '#38BDF8', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>Entrar no Hub (Área do Cliente) <ExternalLink size={12} /></a></li>
-              <li><a href="#calculadora" style={{ color: '#94A3B8', textDecoration: 'none' }}>Calculadora de Retorno (ROI)</a></li>
-              <li><a href="#planos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Planos & Preços</a></li>
-              <li><a href="#faq" style={{ color: '#94A3B8', textDecoration: 'none' }}>Perguntas Frequentes</a></li>
-              <li><Link href="/privacidade" style={{ color: '#94A3B8', textDecoration: 'none' }}>Política de Privacidade (LGPD)</Link></li>
-              <li><Link href="/termos" style={{ color: '#00F5D4', textDecoration: 'none', fontWeight: 600 }}>Termos de Uso do Serviço</Link></li>
-              <li><a href="https://alllogiconline.com.br" target="_blank" rel="noopener noreferrer" style={{ color: '#94A3B8', textDecoration: 'none' }}>Site Institucional AllLogic Online</a></li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <li>
+                <a href="https://hub.alllogiconline.com.br/login" target="_blank" rel="noopener noreferrer" className="footer-link">
+                  <span>Entrar no Hub (Área do Cliente)</span>
+                  <ExternalLink size={12} />
+                </a>
+              </li>
+              <li><a href="#calculadora" className="footer-link">Calculadora de Retorno (ROI)</a></li>
+              <li><a href="#planos" className="footer-link">Planos & Preços</a></li>
+              <li><a href="#faq" className="footer-link">Perguntas Frequentes</a></li>
+              <li><Link href="/privacidade" className="footer-link">Política de Privacidade (LGPD)</Link></li>
+              <li><Link href="/termos" className="footer-link">Termos de Uso do Serviço</Link></li>
+              <li>
+                <button
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      window.dispatchEvent(new Event('open-cookie-banner'));
+                    }
+                  }}
+                  className="footer-link"
+                >
+                  Preferências de Cookies
+                </button>
+              </li>
+              <li>
+                <a href="https://alllogiconline.com.br" target="_blank" rel="noopener noreferrer" className="footer-link">
+                  Site Institucional AllLogic Online
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -117,47 +138,47 @@ export default function Footer() {
         </div>
 
         {/* Linha Divisória */}
-        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '28px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px', fontSize: '0.78rem', color: '#64748B' }}>
+        <div
+          style={{
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            paddingTop: '28px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '16px',
+            fontSize: '0.78rem',
+            color: '#64748B',
+          }}
+        >
           <div>
             © {new Date().getFullYear()} Agillex. Todos os direitos reservados. Engenharia Digital por AllLogic Online.
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <Link href="/privacidade" style={{ color: '#94A3B8', textDecoration: 'none' }}>
-              Privacidade
-            </Link>
-            <span>•</span>
-            <Link href="/termos" style={{ color: '#94A3B8', textDecoration: 'none' }}>
-              Termos de Uso
-            </Link>
-            <span>•</span>
-            <button
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  window.dispatchEvent(new Event('open-cookie-banner'));
-                }
-              }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#64748B',
-                fontSize: '0.78rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: 0,
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#00F5D4')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#64748B')}
-            >
-              <Cookie size={13} />
-              <span>Preferências de Cookies</span>
-            </button>
-            <span>•</span>
-            <span>Tecnologia que trabalha para as pessoas.</span>
+          <div>
+            Tecnologia que trabalha para as pessoas.
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .footer-link {
+          color: #94A3B8;
+          text-decoration: none;
+          font-size: 0.84rem;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          text-align: left;
+          transition: color 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+        .footer-link:hover {
+          color: #00F5D4;
+        }
+      `}</style>
     </footer>
   );
 }

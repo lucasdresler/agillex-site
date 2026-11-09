@@ -16,48 +16,14 @@ export default function FloatingWhatsApp() {
       style={{
         position: 'fixed',
         bottom: '24px',
-        right: '24px',
+        left: '24px',
         zIndex: 95,
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
       }}
     >
-      {/* TOOLTIP / BALÃO DE ATENDIMENTO */}
-      <div
-        style={{
-          backgroundColor: 'rgba(6, 11, 24, 0.92)',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(37, 211, 102, 0.4)',
-          borderRadius: '12px',
-          padding: '8px 14px',
-          color: '#fff',
-          fontSize: '0.82rem',
-          fontWeight: 600,
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(37, 211, 102, 0.2)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          opacity: hovered ? 1 : 0.85,
-          transform: hovered ? 'scale(1.02)' : 'scale(1)',
-          transition: 'all 0.2s ease',
-          pointerEvents: 'none',
-        }}
-        className="whatsapp-tooltip-text"
-      >
-        <span
-          style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: '#25D366',
-            boxShadow: '0 0 8px #25D366',
-          }}
-        />
-        <span>Atendimento WhatsApp</span>
-      </div>
-
-      {/* BOTÃO PRINCIPAL */}
+      {/* BOTÃO PRINCIPAL (LADO ESQUERDO) */}
       <a
         href={whatsappUrl}
         target="_blank"
@@ -79,6 +45,7 @@ export default function FloatingWhatsApp() {
           transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
           transform: hovered ? 'scale(1.08)' : 'scale(1)',
           position: 'relative',
+          flexShrink: 0,
         }}
       >
         {/* Ícone oficial WhatsApp em SVG */}
@@ -104,6 +71,41 @@ export default function FloatingWhatsApp() {
           }}
         />
       </a>
+
+      {/* TOOLTIP / BALÃO DE ATENDIMENTO (À DIREITA DO ÍCONE) */}
+      <div
+        style={{
+          backgroundColor: 'rgba(6, 11, 24, 0.92)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(37, 211, 102, 0.4)',
+          borderRadius: '12px',
+          padding: '8px 14px',
+          color: '#fff',
+          fontSize: '0.82rem',
+          fontWeight: 600,
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(37, 211, 102, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          opacity: hovered ? 1 : 0.85,
+          transform: hovered ? 'scale(1.02)' : 'scale(1)',
+          transition: 'all 0.2s ease',
+          pointerEvents: 'none',
+          whiteSpace: 'nowrap',
+        }}
+        className="whatsapp-tooltip-text"
+      >
+        <span
+          style={{
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            backgroundColor: '#25D366',
+            boxShadow: '0 0 8px #25D366',
+          }}
+        />
+        <span>Atendimento WhatsApp</span>
+      </div>
 
       <style jsx>{`
         @keyframes ping {
