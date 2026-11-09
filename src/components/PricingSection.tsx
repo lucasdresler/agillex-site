@@ -68,7 +68,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: 'projeto sob medida',
       periodYearly: 'projeto sob medida',
       yearlySavings: 'Condições personalizadas para redes',
-      checkoutUrl: 'https://wa.me/5511978253163?text=Olá,%20gostaria%20de%20um%20plano%20corporativo%20do%20Agillex',
+      checkoutUrl: 'https://wa.me/5511966381915?text=Olá,%20gostaria%20de%20um%20plano%20corporativo%20do%20Agillex',
       features: [
         'Múltiplas filiais e profissionais ilimitados',
         'Mais de 10.000 conversas com IA no WhatsApp',
@@ -220,7 +220,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: 'projeto sob medida',
       periodYearly: 'projeto sob medida',
       yearlySavings: 'Volume flexível e SLA dedicado',
-      checkoutUrl: 'https://wa.me/5511978253163?text=Olá,%20gostaria%20de%20um%20plano%20Enterprise%20do%20Agilex%20Atende',
+      checkoutUrl: 'https://wa.me/5511966381915?text=Olá,%20gostaria%20de%20um%20plano%20Enterprise%20do%20Agilex%20Atende',
       features: [
         'Franquia ilimitada ou escalonada de conversas',
         'Múltiplos números de WhatsApp conectados',

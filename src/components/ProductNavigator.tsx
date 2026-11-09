@@ -254,7 +254,7 @@ export default function ProductNavigator({
                   <button onClick={onOpenTrial} className="btn-primary-neon" style={{ padding: '12px 24px' }}>
                     <Sparkles size={16} /> Testar Agilex Atende Grátis
                   </button>
-                  <a href="https://wa.me/5511978253163?text=Olá,%20gostaria%20de%20testar%20a%20IA%20do%20Agilex%20Atende" target="_blank" rel="noopener noreferrer" className="btn-secondary-cyber" style={{ padding: '12px 20px' }}>
+                  <a href="https://wa.me/5511966381915?text=Olá,%20gostaria%20de%20testar%20a%20IA%20do%20Agilex%20Atende" target="_blank" rel="noopener noreferrer" className="btn-secondary-cyber" style={{ padding: '12px 20px' }}>
                     <Phone size={16} /> Testar no meu WhatsApp
                   </a>
                 </div>

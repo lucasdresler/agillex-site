@@ -91,7 +91,7 @@ export default function Footer() {
               Plantão e Suporte Técnico via WhatsApp Oficial:
             </div>
             <a
-              href="https://wa.me/5511978253163?text=Olá,%20preciso%20de%20ajuda%20com%20o%20Agillex"
+              href="https://wa.me/5511966381915?text=Olá,%20preciso%20de%20ajuda%20com%20o%20Agillex"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -108,7 +108,7 @@ export default function Footer() {
                 textDecoration: 'none',
               }}
             >
-              Falar no WhatsApp: (11) 97825-3163
+              Falar no WhatsApp: (11) 96638-1915
             </a>
           </div>
         </div>
