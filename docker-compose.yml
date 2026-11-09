@@ -1,0 +1,19 @@
+services:
+  agillex-site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agillex-site
+    restart: always
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.agillex-site.rule=Host(`agillex.com.br`) || Host(`www.agillex.com.br`)"
+      - "traefik.http.routers.agillex-site.entrypoints=websecure"
+      - "traefik.http.routers.agillex-site.tls.certresolver=letsencrypt"
+      - "traefik.http.services.agillex-site.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true
