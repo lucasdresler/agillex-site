@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Bot, ShieldCheck, Heart, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import { Bot, ShieldCheck, Heart, ExternalLink, Cookie } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -78,6 +79,8 @@ export default function Footer() {
               <li><a href="#calculadora" style={{ color: '#94A3B8', textDecoration: 'none' }}>Calculadora de Retorno (ROI)</a></li>
               <li><a href="#planos" style={{ color: '#94A3B8', textDecoration: 'none' }}>Planos & Preços</a></li>
               <li><a href="#faq" style={{ color: '#94A3B8', textDecoration: 'none' }}>Perguntas Frequentes</a></li>
+              <li><Link href="/privacidade" style={{ color: '#94A3B8', textDecoration: 'none' }}>Política de Privacidade (LGPD)</Link></li>
+              <li><Link href="/termos" style={{ color: '#00F5D4', textDecoration: 'none', fontWeight: 600 }}>Termos de Uso do Serviço</Link></li>
               <li><a href="https://alllogiconline.com.br" target="_blank" rel="noopener noreferrer" style={{ color: '#94A3B8', textDecoration: 'none' }}>Site Institucional AllLogic Online</a></li>
             </ul>
           </div>
@@ -116,10 +119,42 @@ export default function Footer() {
         {/* Linha Divisória */}
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '28px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px', fontSize: '0.78rem', color: '#64748B' }}>
           <div>
-            © {new Date().getFullYear()} Agillex. Todos os direitos reservados. Operado por AllLogic Online.
+            © {new Date().getFullYear()} Agillex. Todos os direitos reservados. Engenharia Digital por AllLogic Online.
           </div>
-          <div>
-            Tecnologia que trabalha para as pessoas.
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <Link href="/privacidade" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+              Privacidade
+            </Link>
+            <span>•</span>
+            <Link href="/termos" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+              Termos de Uso
+            </Link>
+            <span>•</span>
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new Event('open-cookie-banner'));
+                }
+              }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#64748B',
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: 0,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#00F5D4')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#64748B')}
+            >
+              <Cookie size={13} />
+              <span>Preferências de Cookies</span>
+            </button>
+            <span>•</span>
+            <span>Tecnologia que trabalha para as pessoas.</span>
           </div>
         </div>
       </div>

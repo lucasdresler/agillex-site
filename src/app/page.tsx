@@ -10,6 +10,9 @@ import PricingSection from '@/components/PricingSection';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
 import TrialModal from '@/components/TrialModal';
+import BackToTop from '@/components/BackToTop';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import CookieConsent from '@/components/CookieConsent';
 
 export default function Home() {
   const [trialOpen, setTrialOpen] = useState(false);
@@ -59,6 +62,9 @@ export default function Home() {
       <PricingSection onOpenTrial={handleOpenTrial} />
       <FaqSection />
       <Footer />
+      <BackToTop />
+      <FloatingWhatsApp />
+      <CookieConsent />
       <TrialModal isOpen={trialOpen} onClose={handleCloseTrial} />
     </main>
   );
