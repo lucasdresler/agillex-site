@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import ProductsOverviewTable from '@/components/ProductsOverviewTable';
 import ProductNavigator from '@/components/ProductNavigator';
 import RoiCalculator from '@/components/RoiCalculator';
 import PricingSection from '@/components/PricingSection';
@@ -12,6 +13,9 @@ import TrialModal from '@/components/TrialModal';
 
 export default function Home() {
   const [trialOpen, setTrialOpen] = useState(false);
+  const [activeProductTab, setActiveProductTab] = useState<
+    'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged'
+  >('agenda');
 
   const handleOpenTrial = () => {
     setTrialOpen(true);
@@ -22,6 +26,16 @@ export default function Home() {
   };
 
   const handleExploreProducts = () => {
+    const el = document.getElementById('tabela-produtos');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSelectProduct = (
+    productId: 'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged'
+  ) => {
+    setActiveProductTab(productId);
     const el = document.getElementById('produtos');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -32,7 +46,15 @@ export default function Home() {
     <main style={{ minHeight: '100vh', backgroundColor: '#060B18', color: '#fff', position: 'relative' }}>
       <Navbar onOpenTrial={handleOpenTrial} />
       <Hero onOpenTrial={handleOpenTrial} onExploreProducts={handleExploreProducts} />
-      <ProductNavigator onOpenTrial={handleOpenTrial} />
+      <ProductsOverviewTable
+        onSelectProduct={handleSelectProduct}
+        onOpenTrial={handleOpenTrial}
+      />
+      <ProductNavigator
+        activeTab={activeProductTab}
+        onTabChange={setActiveProductTab}
+        onOpenTrial={handleOpenTrial}
+      />
       <RoiCalculator onOpenTrial={handleOpenTrial} />
       <PricingSection onOpenTrial={handleOpenTrial} />
       <FaqSection />

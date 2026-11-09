@@ -27,10 +27,25 @@ import {
 
 interface ProductNavigatorProps {
   onOpenTrial: () => void;
+  activeTab?: 'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged';
+  onTabChange?: (tab: 'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged') => void;
 }
 
-export default function ProductNavigator({ onOpenTrial }: ProductNavigatorProps) {
-  const [activeTab, setActiveTab] = useState<'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged'>('atende');
+export default function ProductNavigator({
+  onOpenTrial,
+  activeTab: controlledTab,
+  onTabChange,
+}: ProductNavigatorProps) {
+  const [internalTab, setInternalTab] = useState<'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged'>('agenda');
+
+  const activeTab = controlledTab ?? internalTab;
+  const setActiveTab = (tab: 'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged') => {
+    if (onTabChange) {
+      onTabChange(tab);
+    } else {
+      setInternalTab(tab);
+    }
+  };
 
   // Estados do Simulador de WhatsApp (Agilex Atende)
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'lead' | 'bot' | 'human'; text: string; time: string; isAudio?: boolean }>>([

@@ -175,6 +175,13 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
           </div>
 
           <button
+            onClick={() => scrollToSection('tabela-produtos')}
+            style={{ background: 'none', border: 'none', color: '#CBD5E1', fontSize: '0.9rem', fontWeight: 500, cursor: 'pointer' }}
+          >
+            Tabela de Soluções
+          </button>
+
+          <button
             onClick={() => scrollToSection('calculadora')}
             style={{ background: 'none', border: 'none', color: '#CBD5E1', fontSize: '0.9rem', fontWeight: 500, cursor: 'pointer' }}
           >
@@ -281,6 +288,12 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
             </button>
           ))}
           <hr style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '4px 0' }} />
+          <button
+            onClick={() => scrollToSection('tabela-produtos')}
+            style={{ background: 'none', border: 'none', color: '#CBD5E1', fontSize: '0.95rem', textAlign: 'left' }}
+          >
+            Tabela de Soluções
+          </button>
           <button
             onClick={() => scrollToSection('calculadora')}
             style={{ background: 'none', border: 'none', color: '#CBD5E1', fontSize: '0.95rem', textAlign: 'left' }}

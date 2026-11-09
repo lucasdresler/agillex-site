@@ -55,16 +55,19 @@ export default function Hero({ onOpenTrial, onExploreProducts }: HeroProps) {
         {/* SUBTÍTULO */}
         <p
           style={{
-            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+            fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
             lineHeight: 1.6,
-            color: '#94A3B8',
-            maxWidth: '820px',
+            color: '#CBD5E1',
+            maxWidth: '860px',
             marginBottom: '40px',
           }}
         >
-          Unifique Atendimento com <strong style={{ color: '#00F5D4' }}>IA humanizada no WhatsApp 24/7</strong>, 
-          Agendamento Online sincronizado, Funil CRM Kanban, Cobrança com <strong style={{ color: '#38BDF8' }}>Taxa Fixa de R$ 1,99</strong>, 
-          Acelerador de Avaliações 5 Estrelas e GED com OCR em uma só plataforma inteligente.
+          A <strong style={{ color: '#00F5D4' }}>Família Agillex</strong> é formada por{' '}
+          <strong style={{ color: '#38BDF8' }}>6 produtos modulares e independentes</strong>. 
+          Contrate apenas o que sua empresa necessita (como o{' '}
+          <strong style={{ color: '#38BDF8' }}>Agendamento Online</strong> por R$ 49,90/mês ou a{' '}
+          <strong style={{ color: '#10B981' }}>Cobrança Pix R$ 1,99</strong>) — ou unifique toda a sua operação no{' '}
+          <strong style={{ color: '#8B5CF6' }}>Combo Agillex Hub</strong>.
         </p>
 
         {/* CTAs */}
@@ -93,7 +96,7 @@ export default function Hero({ onOpenTrial, onExploreProducts }: HeroProps) {
             style={{ fontSize: '1.05rem', padding: '16px 32px' }}
           >
             <Play size={18} fill="#38BDF8" color="#38BDF8" />
-            Explorar Recursos ao Vivo
+            Ver Tabela de Produtos & Recursos
           </button>
         </div>
 
