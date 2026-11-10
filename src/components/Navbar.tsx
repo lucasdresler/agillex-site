@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Bot, ChevronDown, Sparkles, ArrowRight, Menu, X, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
@@ -35,6 +36,8 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `/#${id}`;
     }
   };
 
@@ -63,8 +66,8 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
         }}
       >
         {/* LOGO AGILLEX */}
-        <a
-          href="#"
+        <Link
+          href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -125,7 +128,7 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
               POR ALLLOGIC ONLINE
             </div>
           </div>
-        </a>
+        </Link>
 
         {/* LINKS DESKTOP */}
         <div

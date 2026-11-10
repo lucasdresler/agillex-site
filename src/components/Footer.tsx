@@ -25,7 +25,7 @@ export default function Footer() {
         >
           {/* Coluna 1: Marca & Institucional */}
           <div style={{ maxWidth: '340px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px', textDecoration: 'none' }}>
               <div
                 style={{
                   width: '36px',
@@ -55,7 +55,7 @@ export default function Footer() {
               >
                 AGILLEX
               </span>
-            </div>
+            </Link>
 
             <p style={{ fontSize: '0.86rem', color: '#94A3B8', lineHeight: 1.6, marginBottom: '20px' }}>
               Ecossistema integrado de Atendimento IA 24/7, Agendamento Online Sincronizado, Funil CRM Kanban, Agillex Pay R$ 1,99 e Gestão Operacional.
@@ -73,12 +73,12 @@ export default function Footer() {
               Família Agillex
             </div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Hub (Painel SaaS)</a></li>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agilex Atende (WhatsApp IA)</a></li>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Agenda (Google Calendar)</a></li>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Cobrança (Pix R$ 1,99)</a></li>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Reputação (Google 5★)</a></li>
-              <li><a href="#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex GED (Documentos com IA)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Hub (Painel SaaS)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agilex Atende (WhatsApp IA)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Agenda (Google Calendar)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Cobrança (Pix R$ 1,99)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex Reputação (Google 5★)</a></li>
+              <li><a href="/#produtos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>Agillex GED (Documentos com IA)</a></li>
             </ul>
           </div>
 
@@ -101,17 +101,17 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#calculadora" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                <a href="/#calculadora" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
                   Calculadora de Retorno (ROI)
                 </a>
               </li>
               <li>
-                <a href="#planos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                <a href="/#planos" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
                   Planos & Preços
                 </a>
               </li>
               <li>
-                <a href="#faq" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
+                <a href="/#faq" className="footer-link" style={{ color: '#94A3B8', textDecoration: 'none' }}>
                   Perguntas Frequentes
                 </a>
               </li>
