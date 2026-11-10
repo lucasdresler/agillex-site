@@ -132,7 +132,7 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
               </span>
             </div>
             <div style={{ fontSize: '0.68rem', color: '#64748B', letterSpacing: '0.04em', marginTop: '1px' }}>
-              POR ALLLOGIC ONLINE
+              Por AllLogic Online
             </div>
           </div>
         </Link>

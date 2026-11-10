@@ -36,7 +36,7 @@ export default function Hero({ onOpenTrial, onExploreProducts }: HeroProps) {
         <ScrollReveal direction="down" distance={40}>
           <div className="cyber-badge neon-pulse" style={{ marginBottom: '24px' }}>
             <div className="radar-dot" />
-            <span>Ecossistema Agillex 2026 • Inteligência Comercial & Operação Autônoma</span>
+            <span>Ecossistema Agillex • Inteligência Comercial & Operação Autônoma</span>
           </div>
         </ScrollReveal>
 
