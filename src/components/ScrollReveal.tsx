@@ -57,6 +57,10 @@ export default function ScrollReveal({
     if (inView) {
       return 'translate3d(0, 0, 0) scale(1) rotateX(0deg) rotateY(0deg)';
     }
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile && (direction === 'left' || direction === 'right')) {
+      return `translate3d(0, 20px, 0)`;
+    }
     switch (direction) {
       case 'left':
         return `translate3d(-${distance}px, 0, 0)`;

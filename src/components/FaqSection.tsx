@@ -35,10 +35,10 @@ export default function FaqSection() {
   ];
 
   return (
-    <section id="faq" style={{ padding: '80px 24px', position: 'relative' }}>
+    <section id="faq" style={{ padding: 'clamp(40px, 6vw, 70px) 24px', position: 'relative' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <ScrollReveal direction="down" distance={40}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 40px)' }}>
             <div className="cyber-badge" style={{ marginBottom: '14px' }}>
               <span>Perguntas Frequentes</span>
             </div>

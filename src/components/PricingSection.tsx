@@ -463,7 +463,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       : gedPlans;
 
   return (
-    <section id="planos" style={{ padding: '80px 24px', position: 'relative' }}>
+    <section id="planos" style={{ padding: 'clamp(40px, 6vw, 70px) 24px', position: 'relative' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <ScrollReveal direction="down" distance={40}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>

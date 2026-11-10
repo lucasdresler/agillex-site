@@ -61,6 +61,10 @@ function RevealOnScroll({
 
   const getTransform = () => {
     if (inView) return 'translate3d(0, 0, 0)';
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile && (direction === 'left' || direction === 'right')) {
+      return 'translate3d(0, 20px, 0)';
+    }
     switch (direction) {
       case 'left':
         return `translate3d(-${distance}px, 0, 0)`;
@@ -97,7 +101,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
       id="transformacao"
       style={{
         position: 'relative',
-        padding: '120px 0',
+        padding: 'clamp(50px, 7vw, 85px) 0',
         // Fundo Parallax fixo nítido e iluminado (gradiente transparente para destacar o skyline e as partículas)
         backgroundImage: `linear-gradient(180deg, rgba(6, 11, 24, 0.62) 0%, rgba(6, 11, 24, 0.38) 50%, rgba(6, 11, 24, 0.72) 100%), url('/images/parallax-bg.jpg')`,
         backgroundAttachment: 'fixed',
@@ -123,11 +127,11 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
         }}
       />
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(16px, 3vw, 24px)', position: 'relative', zIndex: 2 }}>
         
         {/* CABEÇALHO DA SEÇÃO (ANIMAÇÃO DESCENDO DO TOPO) */}
-        <RevealOnScroll direction="down" distance={60}>
-          <div style={{ textAlign: 'center', maxWidth: '860px', margin: '0 auto 60px' }}>
+        <RevealOnScroll direction="down" distance={40}>
+          <div style={{ textAlign: 'center', maxWidth: '860px', margin: '0 auto clamp(28px, 4vw, 50px)' }}>
             <div
               className="pulse-badge"
               style={{
@@ -197,6 +201,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
         >
           {/* Header do Caso 1 */}
           <div
+            className="transformation-card-header"
             style={{
               padding: '24px 32px',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
@@ -257,18 +262,19 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
 
           {/* GRID COM AS DUAS FOTOS LADO A LADO - ANIMAÇÕES LATERAIS CRUZADAS */}
           <div
+            className="transformation-grid"
             style={{
               padding: '36px',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '32px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '28px',
               overflow: 'hidden',
             }}
           >
             {/* LADO ESQUERDO: O ANTES (DESLIZA DA ESQUERDA PARA A DIREITA) */}
-            <RevealOnScroll direction="left" distance={110}>
+            <RevealOnScroll direction="left" distance={40}>
               <div
-                className="hover-card-pain"
+                className="hover-card-pain transformation-card-inner"
                 style={{
                   borderRadius: '18px',
                   backgroundColor: 'rgba(239, 68, 68, 0.05)',
@@ -383,9 +389,9 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
             </RevealOnScroll>
 
             {/* LADO DIREITO: O DEPOIS (DESLIZA DA DIREITA PARA A ESQUERDA) */}
-            <RevealOnScroll direction="right" distance={110} delay={120}>
+            <RevealOnScroll direction="right" distance={40} delay={120}>
               <div
-                className="hover-card-relief"
+                className="hover-card-relief transformation-card-inner"
                 style={{
                   borderRadius: '18px',
                   backgroundColor: 'rgba(0, 245, 212, 0.05)',
@@ -517,6 +523,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
         >
           {/* Header do Caso 2 */}
           <div
+            className="transformation-card-header"
             style={{
               padding: '24px 32px',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
@@ -577,18 +584,19 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
 
           {/* GRID COM AS DUAS IMAGENS LADO A LADO - ANIMAÇÕES LATERAIS CRUZADAS */}
           <div
+            className="transformation-grid"
             style={{
               padding: '36px',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '32px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '28px',
               overflow: 'hidden',
             }}
           >
             {/* CARD 1: A DOR (DESLIZA DA ESQUERDA PARA A DIREITA) */}
-            <RevealOnScroll direction="left" distance={110}>
+            <RevealOnScroll direction="left" distance={40}>
               <div
-                className="hover-card-pain"
+                className="hover-card-pain transformation-card-inner"
                 style={{
                   borderRadius: '18px',
                   backgroundColor: 'rgba(239, 68, 68, 0.05)',
@@ -703,9 +711,9 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
             </RevealOnScroll>
 
             {/* CARD 2: O ALÍVIO (DESLIZA DA DIREITA PARA A ESQUERDA) */}
-            <RevealOnScroll direction="right" distance={110} delay={120}>
+            <RevealOnScroll direction="right" distance={40} delay={120}>
               <div
-                className="hover-card-relief"
+                className="hover-card-relief transformation-card-inner"
                 style={{
                   borderRadius: '18px',
                   backgroundColor: 'rgba(0, 245, 212, 0.05)',
@@ -853,8 +861,9 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
           </div>
 
           {/* RODAPÉ DO CARD COM CTA DE CONVERSÃO (DESLIZA SUBINDO) */}
-          <RevealOnScroll direction="up" distance={50} delay={150}>
+          <RevealOnScroll direction="up" distance={30} delay={150}>
             <div
+              className="transformation-card-footer"
               style={{
                 padding: '24px 32px',
                 backgroundColor: 'rgba(6, 11, 24, 0.96)',
@@ -951,6 +960,28 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
           background-color: rgba(0, 245, 212, 0.3) !important;
           transform: translateY(-2px);
           box-shadow: 0 0 20px rgba(0, 245, 212, 0.5);
+        }
+
+        @media (max-width: 768px) {
+          :global(.transformation-grid) {
+            padding: 14px !important;
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          :global(.transformation-card-header) {
+            padding: 16px 16px !important;
+          }
+          :global(.transformation-card-inner) {
+            padding: 16px !important;
+          }
+          :global(.transformation-card-footer) {
+            padding: 16px 16px !important;
+          }
+          .floating-card-1, .floating-card-2 {
+            font-size: 0.68rem !important;
+            padding: 5px 10px !important;
+            max-width: calc(100% - 20px) !important;
+          }
         }
       `}</style>
     </section>

@@ -137,11 +137,11 @@ export default function ProductNavigator({
   ];
 
   return (
-    <section id="produtos" style={{ padding: '80px 24px', position: 'relative' }}>
+    <section id="produtos" style={{ padding: 'clamp(40px, 6vw, 70px) 24px', position: 'relative' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* CABEÇALHO DA SEÇÃO */}
         <ScrollReveal direction="down" distance={40}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 40px)' }}>
             <div className="cyber-badge" style={{ marginBottom: '14px' }}>
               <span>Ecossistema Modular Integrado</span>
             </div>

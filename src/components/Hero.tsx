@@ -14,8 +14,8 @@ export default function Hero({ onOpenTrial, onExploreProducts }: HeroProps) {
     <section
       style={{
         position: 'relative',
-        paddingTop: '150px',
-        paddingBottom: '90px',
+        paddingTop: 'clamp(90px, 12vw, 130px)',
+        paddingBottom: 'clamp(30px, 5vw, 60px)',
         overflow: 'hidden',
       }}
     >

@@ -36,10 +36,10 @@ export default function RoiCalculator({ onOpenTrial }: RoiCalculatorProps) {
   };
 
   return (
-    <section id="calculadora" style={{ padding: '80px 24px', position: 'relative' }}>
+    <section id="calculadora" style={{ padding: 'clamp(40px, 6vw, 70px) 24px', position: 'relative' }}>
       <div style={{ maxWidth: '1120px', margin: '0 auto' }}>
         <ScrollReveal direction="down" distance={40}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 40px)' }}>
             <div className="cyber-badge" style={{ marginBottom: '14px' }}>
               <span>Calculadora de Retorno sobre Investimento (ROI)</span>
             </div>

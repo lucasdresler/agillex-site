@@ -164,7 +164,7 @@ export default function ProductsOverviewTable({
     <section
       id="tabela-produtos"
       style={{
-        padding: '90px 24px',
+        padding: 'clamp(40px, 6vw, 70px) 24px',
         position: 'relative',
         backgroundColor: 'rgba(6, 11, 24, 0.8)',
       }}
@@ -172,7 +172,7 @@ export default function ProductsOverviewTable({
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* CABEÇALHO DA SEÇÃO (DESCENDO SUAVEMENTE) */}
         <ScrollReveal direction="down" distance={40}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 40px)' }}>
             <div className="cyber-badge" style={{ marginBottom: '16px' }}>
               <Sparkles size={14} color="#00F5D4" />
               <span>Ecossistema Modular • 6 Soluções Independentes ou 100% Integradas</span>
