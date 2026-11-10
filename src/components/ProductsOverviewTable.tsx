@@ -236,14 +236,14 @@ export default function ProductsOverviewTable({
               backgroundColor: 'rgba(15, 23, 42, 0.55)',
               backdropFilter: 'blur(16px)',
               boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
-              padding: '12px 14px',
+              padding: '16px 24px',
             }}
           >
             <table
               style={{
                 width: '100%',
                 borderCollapse: 'separate',
-                borderSpacing: '0 8px',
+                borderSpacing: '0 10px',
                 textAlign: 'left',
                 fontSize: '0.9rem',
               }}
@@ -585,14 +585,14 @@ export default function ProductsOverviewTable({
             border-bottom-right-radius: 14px;
           }
           .product-table-row:hover {
-            transform: scale(1.022);
+            transform: scale(1.05);
             position: relative;
             z-index: 30;
           }
           .product-table-row:hover td {
             background-color: rgba(18, 30, 58, 0.98) !important;
             border-color: rgba(0, 245, 212, 0.45) !important;
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 245, 212, 0.18);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 245, 212, 0.22);
           }
           .product-table-row:hover td:first-child {
             border-left: 4px solid #00F5D4 !important;
