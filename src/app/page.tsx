@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProductsOverviewTable from '@/components/ProductsOverviewTable';
+import TransformationSection from '@/components/TransformationSection';
 import ProductNavigator from '@/components/ProductNavigator';
 import RoiCalculator from '@/components/RoiCalculator';
 import PricingSection from '@/components/PricingSection';
@@ -52,6 +53,10 @@ export default function Home() {
       <ProductsOverviewTable
         onSelectProduct={handleSelectProduct}
         onOpenTrial={handleOpenTrial}
+      />
+      <TransformationSection
+        onOpenTrial={handleOpenTrial}
+        onSelectProduct={handleSelectProduct}
       />
       <ProductNavigator
         activeTab={activeProductTab}
