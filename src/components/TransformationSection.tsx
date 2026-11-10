@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, MouseEvent, TouchEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Sparkles,
   ArrowRight,
@@ -13,8 +13,6 @@ import {
   CalendarCheck,
   MessageSquare,
   Bot,
-  Sliders,
-  MoveHorizontal,
 } from 'lucide-react';
 
 interface TransformationSectionProps {
@@ -23,64 +21,71 @@ interface TransformationSectionProps {
 }
 
 export default function TransformationSection({ onOpenTrial, onSelectProduct }: TransformationSectionProps) {
-  // Slider interativo Antes vs Depois (GED)
-  const [sliderPos, setSliderPos] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const handleMove = (clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percent = Math.max(5, Math.min(95, (x / rect.width) * 100));
-    setSliderPos(percent);
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.15 }
+    );
 
-  const handleTouchMove = (e: TouchEvent) => {
-    handleMove(e.touches[0].clientX);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging) {
-      handleMove(e.clientX);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  };
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="transformacao"
       style={{
         position: 'relative',
         padding: '120px 0',
-        // Fundo com Parallax fixo nítido e visível (gradiente reduzido para permitir visão clara dos prédios e luzes)
-        backgroundImage: `linear-gradient(180deg, rgba(6, 11, 24, 0.70) 0%, rgba(6, 11, 24, 0.52) 50%, rgba(6, 11, 24, 0.78) 100%), url('/images/parallax-bg.jpg')`,
+        // Fundo Parallax fixo nítido e iluminado (gradiente transparente para destacar o skyline e as partículas)
+        backgroundImage: `linear-gradient(180deg, rgba(6, 11, 24, 0.62) 0%, rgba(6, 11, 24, 0.38) 50%, rgba(6, 11, 24, 0.72) 100%), url('/images/parallax-bg.jpg')`,
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        borderTop: '1px solid rgba(0, 245, 212, 0.3)',
-        borderBottom: '1px solid rgba(56, 189, 248, 0.3)',
+        borderTop: '1px solid rgba(0, 245, 212, 0.35)',
+        borderBottom: '1px solid rgba(56, 189, 248, 0.35)',
         overflow: 'hidden',
       }}
     >
-      {/* Luz ambiente neon sutil */}
+      {/* Luz ambiente de fundo neon */}
       <div
         style={{
           position: 'absolute',
           top: '15%',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '900px',
+          width: '950px',
           height: '450px',
-          background: 'radial-gradient(circle, rgba(0, 245, 212, 0.12) 0%, rgba(31, 111, 255, 0.08) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 245, 212, 0.14) 0%, rgba(31, 111, 255, 0.08) 50%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
 
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
         
-        {/* CABEÇALHO DA SEÇÃO */}
-        <div style={{ textAlign: 'center', maxWidth: '860px', margin: '0 auto 60px' }}>
+        {/* CABEÇALHO DA SEÇÃO (ANIMAÇÃO DE ENTRADA AO ROLAR) */}
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '860px',
+            margin: '0 auto 60px',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(-30px)',
+            transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
           <div
             className="pulse-badge"
             style={{
@@ -89,15 +94,15 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
               gap: '8px',
               padding: '8px 20px',
               borderRadius: '999px',
-              backgroundColor: 'rgba(0, 245, 212, 0.15)',
-              border: '1px solid rgba(0, 245, 212, 0.4)',
+              backgroundColor: 'rgba(0, 245, 212, 0.18)',
+              border: '1px solid rgba(0, 245, 212, 0.5)',
               color: '#00F5D4',
               fontSize: '0.82rem',
               fontWeight: 800,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
               marginBottom: '20px',
-              boxShadow: '0 0 20px rgba(0, 245, 212, 0.25)',
+              backdropFilter: 'blur(8px)',
             }}
           >
             <Sparkles size={16} />
@@ -112,7 +117,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
               lineHeight: 1.15,
               marginBottom: '20px',
               color: '#fff',
-              textShadow: '0 4px 20px rgba(0,0,0,0.8)',
+              textShadow: '0 4px 25px rgba(0,0,0,0.9)',
             }}
           >
             Você não abriu um negócio para passar o dia atolado em{' '}
@@ -128,26 +133,30 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
             .
           </h2>
 
-          <p style={{ fontSize: '1.12rem', color: '#CBD5E1', lineHeight: 1.7, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-            Veja o impacto da automação no dia a dia: de mesas caóticas e celulares apitando sem parar à tranquilidade de uma engenharia digital trabalhando por você.
+          <p style={{ fontSize: '1.14rem', color: '#E2E8F0', lineHeight: 1.7, textShadow: '0 2px 12px rgba(0,0,0,0.9)' }}>
+            Veja o impacto direto: de mesas caóticas e celulares apitando sem parar à tranquilidade de uma engenharia digital trabalhando por você 24 horas por dia.
           </p>
         </div>
 
         {/* =========================================================================
-            HISTÓRIA 1: GESTÃO DE DOCUMENTOS & PAPÉIS (COM SLIDER INTERATIVO DE ARRASTE)
+            HISTÓRIA 1: GESTÃO DE DOCUMENTOS & PAPÉIS (LADO A LADO DIRETO)
         ========================================================================= */}
         <div
+          className="story-block"
           style={{
-            backgroundColor: 'rgba(10, 17, 40, 0.82)',
+            backgroundColor: 'rgba(10, 17, 40, 0.84)',
             borderRadius: '24px',
-            border: '1px solid rgba(0, 245, 212, 0.3)',
+            border: '1px solid rgba(0, 245, 212, 0.35)',
             backdropFilter: 'blur(20px)',
             overflow: 'hidden',
             marginBottom: '60px',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 245, 212, 0.1)',
+            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 245, 212, 0.1)',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+            transition: 'all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s',
           }}
         >
-          {/* Top Header do Caso 1 */}
+          {/* Header do Caso 1 */}
           <div
             style={{
               padding: '24px 32px',
@@ -187,6 +196,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
 
             <button
               onClick={() => onSelectProduct ? onSelectProduct('ged') : onOpenTrial()}
+              className="action-btn-hover"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -199,15 +209,6 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                 fontSize: '0.84rem',
                 fontWeight: 700,
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(0, 245, 212, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(0, 245, 212, 0.15)';
-                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               Conhecer Agillex GED
@@ -215,254 +216,264 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
             </button>
           </div>
 
-          {/* SLIDER INTERATIVO ANTES vs DEPOIS */}
-          <div style={{ padding: '32px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  color: '#38BDF8',
-                  background: 'rgba(56, 189, 248, 0.12)',
-                  padding: '4px 14px',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(56, 189, 248, 0.25)',
-                }}
-              >
-                <MoveHorizontal size={14} />
-                Arraste o divisor no meio da foto para ver a transformação:
-              </span>
-            </div>
-
+          {/* GRID COM AS DUAS FOTOS LADO A LADO COM EFEITOS DE MOUSE OVER */}
+          <div
+            style={{
+              padding: '36px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '32px',
+            }}
+          >
+            {/* LADO ESQUERDO: O ANTES (MESA COM PAPÉIS) */}
             <div
-              ref={containerRef}
-              onMouseDown={() => setIsDragging(true)}
-              onMouseUp={() => setIsDragging(false)}
-              onMouseLeave={() => setIsDragging(false)}
-              onMouseMove={handleMouseMove}
-              onTouchMove={handleTouchMove}
+              className="hover-card-pain"
               style={{
-                position: 'relative',
-                width: '100%',
-                height: '420px',
-                borderRadius: '20px',
-                overflow: 'hidden',
-                userSelect: 'none',
-                cursor: 'ew-resize',
-                border: '2px solid rgba(0, 245, 212, 0.35)',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 245, 212, 0.15)',
+                borderRadius: '18px',
+                backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.35s ease',
               }}
             >
-              {/* IMAGEM DE FUNDO: O ALÍVIO (DEPOIS) */}
-              <img
-                src="/images/alivio-digital-ged.jpg"
-                alt="Depois: Gestor tranquilo com mesa limpa e organizada"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-                draggable={false}
-              />
-              {/* Tag Superior Direita (Depois) */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '16px',
-                  right: '16px',
-                  padding: '8px 16px',
-                  borderRadius: '10px',
-                  backgroundColor: 'rgba(6, 11, 24, 0.88)',
-                  backdropFilter: 'blur(10px)',
-                  color: '#00F5D4',
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  border: '1px solid rgba(0, 245, 212, 0.5)',
-                  boxShadow: '0 4px 15px rgba(0, 245, 212, 0.3)',
-                  zIndex: 2,
-                }}
-              >
-                ✨ DEPOIS: Gestão com Agillex GED
-              </div>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '8px',
+                      backgroundColor: 'rgba(239, 68, 68, 0.18)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#EF4444',
+                    }}
+                  >
+                    <XCircle size={18} />
+                  </div>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#EF4444', textTransform: 'uppercase' }}>
+                    Antes: Caos de Papéis & Sobrecarga
+                  </span>
+                </div>
 
-              {/* IMAGEM SOBREPOSTA: A DOR (ANTES) - CORTADA PELO SLIDER */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: `${sliderPos}%`,
-                  height: '100%',
-                  overflow: 'hidden',
-                  borderRight: '3px solid #00F5D4',
-                  boxShadow: '5px 0 25px rgba(0, 245, 212, 0.6)',
-                  zIndex: 3,
-                }}
-              >
-                <img
-                  src="/images/dor-papelada-ged.jpg"
-                  alt="Antes: Mesa de escritório atolada de papéis"
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%',
-                    maxWidth: 'none',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                  draggable={false}
-                />
-                {/* Tag Superior Esquerda (Antes) */}
+                {/* Foto com Zoom no Hover */}
                 <div
+                  className="photo-frame"
                   style={{
-                    position: 'absolute',
-                    top: '16px',
-                    left: '16px',
-                    padding: '8px 16px',
-                    borderRadius: '10px',
-                    backgroundColor: 'rgba(6, 11, 24, 0.88)',
-                    backdropFilter: 'blur(10px)',
-                    color: '#EF4444',
-                    fontSize: '0.84rem',
-                    fontWeight: 800,
-                    border: '1px solid rgba(239, 68, 68, 0.5)',
-                    boxShadow: '0 4px 15px rgba(239, 68, 68, 0.3)',
-                    whiteSpace: 'nowrap',
+                    position: 'relative',
+                    width: '100%',
+                    height: '240px',
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    marginBottom: '20px',
+                    border: '1px solid rgba(239, 68, 68, 0.35)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
                   }}
                 >
-                  ⚠️ ANTES: Caos de Papéis & Estresse
+                  <img
+                    src="/images/dor-papelada-ged.jpg"
+                    alt="Gestor sobrecarregado com pilhas de papel e pastas"
+                    className="photo-zoom"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: 'contrast(105%)',
+                      transition: 'transform 0.5s ease',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '10px',
+                      left: '10px',
+                      padding: '5px 12px',
+                      borderRadius: '6px',
+                      backgroundColor: 'rgba(6, 11, 24, 0.88)',
+                      backdropFilter: 'blur(8px)',
+                      color: '#F87171',
+                      fontSize: '0.74rem',
+                      fontWeight: 700,
+                      border: '1px solid rgba(239, 68, 68, 0.35)',
+                    }}
+                  >
+                    ⚠️ Pastas A-Z acumulando poeira
+                  </div>
                 </div>
+
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
+                    <span>Mesa tomada por documentos físicos, pastas de arquivo e comprovantes.</span>
+                  </li>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
+                    <span>Até 40 minutos perdidos procurando uma única certidão ou procuração.</span>
+                  </li>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
+                    <span>Risco de multas e contratos perdidos por falta de alerta de vencimento.</span>
+                  </li>
+                </ul>
               </div>
 
-              {/* BARRA & BOTÃO CENTRAL DO SLIDER */}
               <div
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: `${sliderPos}%`,
-                  transform: 'translateX(-50%)',
-                  width: '4px',
-                  zIndex: 10,
-                  pointerEvents: 'none',
+                  marginTop: '20px',
+                  padding: '12px 14px',
+                  borderRadius: '10px',
+                  backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                  fontSize: '0.78rem',
+                  color: '#FCA5A5',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  gap: '8px',
                 }}
               >
+                <Clock size={16} />
+                <span>Média de <strong>18 a 25 horas semanais</strong> perdidas em arquivos manuais.</span>
+              </div>
+            </div>
+
+            {/* LADO DIREITO: O DEPOIS (MESA LIMPA COM CELULAR) */}
+            <div
+              className="hover-card-relief"
+              style={{
+                borderRadius: '18px',
+                backgroundColor: 'rgba(0, 245, 212, 0.05)',
+                border: '1px solid rgba(0, 245, 212, 0.38)',
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.35s ease',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '8px',
+                      background: 'linear-gradient(135deg, #1F6FFF 0%, #00F5D4 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#060B18',
+                    }}
+                  >
+                    <CheckCircle2 size={18} strokeWidth={2.5} />
+                  </div>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#00F5D4', textTransform: 'uppercase' }}>
+                    Depois: Organização Inteligente com IA
+                  </span>
+                </div>
+
+                {/* Foto com Zoom no Hover */}
                 <div
+                  className="photo-frame"
                   style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: '#060B18',
-                    border: '2px solid #00F5D4',
-                    boxShadow: '0 0 20px rgba(0, 245, 212, 0.7)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#00F5D4',
-                    cursor: 'ew-resize',
+                    position: 'relative',
+                    width: '100%',
+                    height: '240px',
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    marginBottom: '20px',
+                    border: '1px solid rgba(0, 245, 212, 0.45)',
+                    boxShadow: '0 10px 30px rgba(0, 245, 212, 0.2)',
                   }}
                 >
-                  <MoveHorizontal size={20} />
+                  <img
+                    src="/images/alivio-digital-ged.jpg"
+                    alt="Gestor tranquilo em mesa limpa com celular"
+                    className="photo-zoom"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease',
+                    }}
+                  />
+                  <div
+                    className="floating-card-1"
+                    style={{
+                      position: 'absolute',
+                      bottom: '10px',
+                      left: '10px',
+                      padding: '6px 14px',
+                      borderRadius: '8px',
+                      backgroundColor: 'rgba(6, 11, 24, 0.92)',
+                      backdropFilter: 'blur(10px)',
+                      color: '#00F5D4',
+                      fontSize: '0.76rem',
+                      fontWeight: 800,
+                      border: '1px solid rgba(0, 245, 212, 0.5)',
+                      boxShadow: '0 4px 15px rgba(0, 245, 212, 0.3)',
+                    }}
+                  >
+                    ⚡ Contrato localizado em 1.4s no celular
+                  </div>
                 </div>
+
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#E2E8F0' }}>
+                    <span style={{ color: '#00F5D4', fontWeight: 800 }}>✓</span>
+                    <span>Mesa 100% limpa com digitalização OCR e leitura de cláusulas por IA.</span>
+                  </li>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#E2E8F0' }}>
+                    <span style={{ color: '#00F5D4', fontWeight: 800 }}>✓</span>
+                    <span>Pesquisa instantânea por palavras-chave em qualquer dispositivo móvel.</span>
+                  </li>
+                  <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#E2E8F0' }}>
+                    <span style={{ color: '#00F5D4', fontWeight: 800 }}>✓</span>
+                    <span>Alertas automáticos no WhatsApp antes que certidões ou contratos expirem.</span>
+                  </li>
+                </ul>
               </div>
 
-              {/* BADGE FLUTUANTE INFERIOR */}
               <div
-                className="floating-card"
                 style={{
-                  position: 'absolute',
-                  bottom: '16px',
-                  right: '16px',
-                  padding: '10px 18px',
-                  borderRadius: '12px',
-                  backgroundColor: 'rgba(6, 11, 24, 0.92)',
-                  backdropFilter: 'blur(12px)',
-                  color: '#fff',
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  border: '1px solid rgba(0, 245, 212, 0.4)',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
-                  zIndex: 5,
+                  marginTop: '20px',
+                  padding: '12px 14px',
+                  borderRadius: '10px',
+                  backgroundColor: 'rgba(0, 245, 212, 0.08)',
+                  fontSize: '0.78rem',
+                  color: '#A7F3D0',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
                 }}
               >
                 <Zap size={16} color="#00F5D4" />
-                <span>Busca com IA OCR: <strong>Contrato localizado em 1.4s</strong></span>
-              </div>
-            </div>
-
-            {/* Comparativo de Pontos do GED */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '24px',
-                marginTop: '32px',
-              }}
-            >
-              <div
-                style={{
-                  padding: '20px',
-                  borderRadius: '14px',
-                  backgroundColor: 'rgba(239, 68, 68, 0.05)',
-                  border: '1px solid rgba(239, 68, 68, 0.2)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#EF4444', fontWeight: 800, fontSize: '0.88rem', marginBottom: '10px' }}>
-                  <XCircle size={18} />
-                  Sem o Agillex GED:
-                </div>
-                <p style={{ fontSize: '0.86rem', color: '#CBD5E1', lineHeight: 1.6, margin: 0 }}>
-                  Pastas pesadas acumulando poeira, até 40 minutos para achar um contrato urgente e o risco constante de multas por certidões vencidas.
-                </p>
-              </div>
-
-              <div
-                style={{
-                  padding: '20px',
-                  borderRadius: '14px',
-                  backgroundColor: 'rgba(0, 245, 212, 0.06)',
-                  border: '1px solid rgba(0, 245, 212, 0.3)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#00F5D4', fontWeight: 800, fontSize: '0.88rem', marginBottom: '10px' }}>
-                  <CheckCircle2 size={18} />
-                  Com o Agillex GED:
-                </div>
-                <p style={{ fontSize: '0.86rem', color: '#CBD5E1', lineHeight: 1.6, margin: 0 }}>
-                  Mesa 100% limpa, busca por palavras no celular como no Google, assinatura digital em 1 clique e alertas preventivos no WhatsApp antes que qualquer prazo expire.
-                </p>
+                <span>Mais de <strong>90% de economia de espaço físico</strong> e tranquilidade jurídica total.</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* =========================================================================
-            HISTÓRIA 2: ATENDIMENTO & CONSULTAS (LADO A LADO COM BALÕES DE WHATSAPP)
+            HISTÓRIA 2: ATENDIMENTO & CONSULTAS (LADO A LADO DIRETO COM FOTO NATURAL)
         ========================================================================= */}
         <div
+          className="story-block"
           style={{
-            backgroundColor: 'rgba(10, 17, 40, 0.82)',
+            backgroundColor: 'rgba(10, 17, 40, 0.84)',
             borderRadius: '24px',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
+            border: '1px solid rgba(56, 189, 248, 0.35)',
             backdropFilter: 'blur(20px)',
             overflow: 'hidden',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(56, 189, 248, 0.1)',
+            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(56, 189, 248, 0.1)',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+            transition: 'all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s',
           }}
         >
-          {/* Top Header do Caso 2 */}
+          {/* Header do Caso 2 */}
           <div
             style={{
               padding: '24px 32px',
@@ -502,6 +513,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
 
             <button
               onClick={() => onSelectProduct ? onSelectProduct('agenda') : onOpenTrial()}
+              className="action-btn-hover"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -514,15 +526,6 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                 fontSize: '0.84rem',
                 fontWeight: 700,
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.15)';
-                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               Conhecer Agilex Atende & Agenda
@@ -541,24 +544,26 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
           >
             {/* CARD 1: A DOR (A RECEPCIONISTA ATOLADA DE CELULARES) */}
             <div
+              className="hover-card-pain"
               style={{
                 borderRadius: '18px',
-                backgroundColor: 'rgba(239, 68, 68, 0.04)',
-                border: '1px solid rgba(239, 68, 68, 0.25)',
+                backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
                 padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                transition: 'all 0.35s ease',
               }}
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
                   <div
                     style={{
-                      width: '30px',
-                      height: '30px',
+                      width: '32px',
+                      height: '32px',
                       borderRadius: '8px',
-                      backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                      backgroundColor: 'rgba(239, 68, 68, 0.18)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -568,12 +573,13 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                     <XCircle size={18} />
                   </div>
                   <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#EF4444', textTransform: 'uppercase' }}>
-                    O Esgotamento do Atendimento Manual
+                    Antes: O Esgotamento do Atendimento Manual
                   </span>
                 </div>
 
-                {/* Foto da dor */}
+                {/* Foto com Zoom no Hover */}
                 <div
+                  className="photo-frame"
                   style={{
                     position: 'relative',
                     width: '100%',
@@ -581,18 +587,20 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                     borderRadius: '14px',
                     overflow: 'hidden',
                     marginBottom: '20px',
-                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    border: '1px solid rgba(239, 68, 68, 0.35)',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
                   }}
                 >
                   <img
                     src="/images/dor-atendimento-whatsapp.jpg"
                     alt="Recepcionista estressada com múltiplos celulares e anotações"
+                    className="photo-zoom"
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
                       filter: 'contrast(105%)',
+                      transition: 'transform 0.5s ease',
                     }}
                   />
                   <div
@@ -600,32 +608,32 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                       position: 'absolute',
                       bottom: '10px',
                       left: '10px',
-                      padding: '4px 12px',
+                      padding: '5px 12px',
                       borderRadius: '6px',
                       backgroundColor: 'rgba(6, 11, 24, 0.88)',
                       backdropFilter: 'blur(8px)',
                       color: '#F87171',
-                      fontSize: '0.72rem',
+                      fontSize: '0.74rem',
                       fontWeight: 700,
                       border: '1px solid rgba(239, 68, 68, 0.35)',
                     }}
                   >
-                    ⚠️ 2 celulares tocando + áudios sem ouvir
+                    ⚠️ 2 celulares tocando + áudios acumulados
                   </div>
                 </div>
 
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
-                    <span style={{ color: '#EF4444' }}>✕</span>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
                     <span>Mensagens de clientes perdidas ou respondidas com horas de atraso.</span>
                   </li>
                   <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
-                    <span style={{ color: '#EF4444' }}>✕</span>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
                     <span>No-shows de até 35% por falta de confirmação antecipada.</span>
                   </li>
                   <li style={{ display: 'flex', gap: '8px', fontSize: '0.86rem', color: '#CBD5E1' }}>
-                    <span style={{ color: '#EF4444' }}>✕</span>
-                    <span>Noites e fins de semana interrompidos por dúvidas de agendamento.</span>
+                    <span style={{ color: '#EF4444', fontWeight: 800 }}>✕</span>
+                    <span>Noites e fins de semana interrompidos por dúvidas repetitivas.</span>
                   </li>
                 </ul>
               </div>
@@ -644,29 +652,31 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                 }}
               >
                 <Clock size={16} />
-                <span>Recepcionistas gastam mais de <strong>60% do dia</strong> apenas respondendo mensagens repetitivas.</span>
+                <span>Recepcionistas gastam mais de <strong>60% do expediente</strong> respondendo o WhatsApp.</span>
               </div>
             </div>
 
-            {/* CARD 2: O ALÍVIO (A MÉDICA COM TABLET + BALÕES DE WHATSAPP FLUTUANTES) */}
+            {/* CARD 2: O ALÍVIO (MÉDICA EM POSTURA NATURAL COM BALÕES ANIMADOS) */}
             <div
+              className="hover-card-relief"
               style={{
                 borderRadius: '18px',
-                backgroundColor: 'rgba(0, 245, 212, 0.04)',
-                border: '1px solid rgba(0, 245, 212, 0.35)',
+                backgroundColor: 'rgba(0, 245, 212, 0.05)',
+                border: '1px solid rgba(0, 245, 212, 0.38)',
                 padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 position: 'relative',
+                transition: 'all 0.35s ease',
               }}
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
                   <div
                     style={{
-                      width: '30px',
-                      height: '30px',
+                      width: '32px',
+                      height: '32px',
                       borderRadius: '8px',
                       background: 'linear-gradient(135deg, #1F6FFF 0%, #00F5D4 100%)',
                       display: 'flex',
@@ -678,12 +688,13 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                     <CheckCircle2 size={18} strokeWidth={2.5} />
                   </div>
                   <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#00F5D4', textTransform: 'uppercase' }}>
-                    A Serenidade da IA Oficial no WhatsApp
+                    Depois: A Serenidade da IA Oficial no WhatsApp
                   </span>
                 </div>
 
-                {/* Foto do Alívio com Balões Flutuantes Animados */}
+                {/* Foto com Postura Natural e Balões Flutuantes Animados */}
                 <div
+                  className="photo-frame"
                   style={{
                     position: 'relative',
                     width: '100%',
@@ -691,17 +702,19 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                     borderRadius: '14px',
                     overflow: 'hidden',
                     marginBottom: '20px',
-                    border: '1px solid rgba(0, 245, 212, 0.4)',
-                    boxShadow: '0 10px 30px rgba(0, 245, 212, 0.2)',
+                    border: '1px solid rgba(0, 245, 212, 0.45)',
+                    boxShadow: '0 10px 30px rgba(0, 245, 212, 0.25)',
                   }}
                 >
                   <img
                     src="/images/agenda-atendimento-saude.jpg"
-                    alt="Médica serena em consultório moderno com agenda organizada no tablet"
+                    alt="Médica serena em consultório moderno com agenda organizada no notebook"
+                    className="photo-zoom"
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
+                      transition: 'transform 0.5s ease',
                     }}
                   />
 
@@ -712,21 +725,21 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                       position: 'absolute',
                       top: '12px',
                       left: '12px',
-                      backgroundColor: 'rgba(6, 11, 24, 0.92)',
+                      backgroundColor: 'rgba(6, 11, 24, 0.94)',
                       backdropFilter: 'blur(10px)',
                       padding: '6px 12px',
                       borderRadius: '8px',
-                      border: '1px solid rgba(0, 245, 212, 0.4)',
+                      border: '1px solid rgba(0, 245, 212, 0.45)',
                       fontSize: '0.72rem',
                       color: '#E2E8F0',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '6px',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.7)',
                     }}
                   >
                     <MessageSquare size={13} color="#00F5D4" />
-                    <span>Áudio do cliente: <i>"Tem horário pra quinta?"</i></span>
+                    <span>Áudio recebido: <i>"Tem horário para quinta às 15h?"</i></span>
                   </div>
 
                   {/* Balão 2 Flutuante: Resposta da IA Agillex */}
@@ -736,22 +749,22 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                       position: 'absolute',
                       bottom: '12px',
                       right: '12px',
-                      backgroundColor: 'rgba(6, 11, 24, 0.94)',
+                      backgroundColor: 'rgba(6, 11, 24, 0.95)',
                       backdropFilter: 'blur(12px)',
                       padding: '8px 14px',
                       borderRadius: '10px',
-                      border: '1px solid rgba(0, 245, 212, 0.5)',
+                      border: '1px solid rgba(0, 245, 212, 0.55)',
                       fontSize: '0.74rem',
                       color: '#00F5D4',
                       fontWeight: 700,
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      boxShadow: '0 6px 20px rgba(0, 245, 212, 0.25)',
+                      boxShadow: '0 6px 20px rgba(0, 245, 212, 0.35)',
                     }}
                   >
                     <Bot size={15} color="#00F5D4" />
-                    <span>IA Agillex: <strong>Consulta marcada às 15h ✅</strong></span>
+                    <span>IA Agillex: <strong>Consulta confirmada na agenda ✅</strong></span>
                   </div>
                 </div>
 
@@ -785,7 +798,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                 }}
               >
                 <Zap size={16} color="#00F5D4" />
-                <span>Economia de até <strong>R$ 1.800/mês</strong> em custos de recepção adicional e zero pacientes perdidos.</span>
+                <span>Economia média de <strong>R$ 1.800/mês</strong> em recepcionistas adicionais e zero perda de clientes.</span>
               </div>
             </div>
           </div>
@@ -832,10 +845,12 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
       <style jsx>{`
         @keyframes pulseGlow {
           0%, 100% {
-            box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.25);
+            border-color: rgba(0, 245, 212, 0.5);
           }
           50% {
-            box-shadow: 0 0 25px rgba(0, 245, 212, 0.5);
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.6);
+            border-color: rgba(0, 245, 212, 0.9);
           }
         }
         @keyframes floatSlow {
@@ -862,6 +877,29 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
         }
         .floating-card-2 {
           animation: floatSlowReverse 4.5s infinite ease-in-out;
+        }
+
+        /* EFEITOS DE MOUSE OVER (HOVER) */
+        :global(.hover-card-pain:hover) {
+          transform: translateY(-6px);
+          border-color: rgba(239, 68, 68, 0.6) !important;
+          box-shadow: 0 15px 35px rgba(239, 68, 68, 0.2) !important;
+        }
+        :global(.hover-card-relief:hover) {
+          transform: translateY(-6px);
+          border-color: rgba(0, 245, 212, 0.7) !important;
+          box-shadow: 0 15px 40px rgba(0, 245, 212, 0.3) !important;
+        }
+        :global(.photo-frame:hover .photo-zoom) {
+          transform: scale(1.07);
+        }
+        :global(.action-btn-hover) {
+          transition: all 0.25s ease;
+        }
+        :global(.action-btn-hover:hover) {
+          background-color: rgba(0, 245, 212, 0.3) !important;
+          transform: translateY(-2px);
+          box-shadow: 0 0 15px rgba(0, 245, 212, 0.4);
         }
       `}</style>
     </section>
