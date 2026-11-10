@@ -707,7 +707,7 @@ export default function TransformationSection({ onOpenTrial, onSelectProduct }: 
                   }}
                 >
                   <img
-                    src="/images/agenda-atendimento-saude.jpg"
+                    src="/images/agenda-atendimento-saude.jpg?v=2"
                     alt="Médica serena em consultório moderno com agenda organizada no notebook"
                     className="photo-zoom"
                     style={{
