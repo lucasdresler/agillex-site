@@ -25,7 +25,16 @@ export default function Footer() {
         >
           {/* Coluna 1: Marca & Institucional */}
           <div style={{ maxWidth: '340px' }}>
-            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px', textDecoration: 'none' }}>
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px', textDecoration: 'none', cursor: 'pointer' }}
+            >
               <div
                 style={{
                   width: '36px',
@@ -90,7 +99,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
                 <a
-                  href="https://hub.alllogiconline.com.br/login"
+                  href="https://hub.agillex.com.br/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-link"

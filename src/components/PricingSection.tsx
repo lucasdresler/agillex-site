@@ -42,7 +42,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 2.398,80/ano)',
       yearlySavings: 'Economize R$ 600 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=combo&plano=combo&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=combo&plano=combo&trial=true',
       features: [
         'Atendimento Inteligente com IA no WhatsApp (até 2.000 conversas/mês)',
         'Agillex Agenda Pro para equipe de até 5 profissionais',
@@ -95,7 +95,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 478,80/ano)',
       yearlySavings: 'Economize 20% no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=agenda&plano=agenda_inicial&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=agenda&plano=agenda_inicial&trial=true',
       features: [
         '1 Profissional com agenda própria exclusiva',
         'Clientes, serviços e agendamentos ILIMITADOS',
@@ -120,7 +120,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 958,80/ano)',
       yearlySavings: 'Economize 20% no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=agenda&plano=agenda_intermediario&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=agenda&plano=agenda_intermediario&trial=true',
       features: [
         'Até 5 Profissionais com agendas independentes',
         'Clientes, serviços e agendamentos ILIMITADOS',
@@ -145,7 +145,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 1.678,80/ano)',
       yearlySavings: 'Economize 18% no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=agenda&plano=agenda_avancado&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=agenda&plano=agenda_avancado&trial=true',
       features: [
         'Até 10 Profissionais com agendas independentes',
         'Clientes, serviços e agendamentos ILIMITADOS',
@@ -173,7 +173,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 958,80/ano)',
       yearlySavings: 'Economize 20% no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=atendimento&plano=starter&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=atendimento&plano=starter&trial=true',
       features: [
         'Até 500 conversas/mês no WhatsApp Oficial',
         'Atendimento inteligente com IA 24 horas por dia',
@@ -197,7 +197,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 1.798,80/ano)',
       yearlySavings: 'Economize R$ 360 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=atendimento&plano=pro&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=atendimento&plano=pro&trial=true',
       features: [
         'Até 2.000 conversas/mês no WhatsApp Oficial',
         'Atendimento inteligente com IA 24 horas por dia',
@@ -246,7 +246,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 468,00/ano)',
       yearlySavings: 'Economize R$ 120 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=cobranca&plano=cobranca-start&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=cobranca&plano=cobranca-start&trial=true',
       features: [
         'Até 50 cobranças ativas por mês',
         'Régua inteligente no WhatsApp (antes, no dia e após vencimento)',
@@ -269,7 +269,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 828,00/ano)',
       yearlySavings: 'Economize R$ 240 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=cobranca&plano=cobranca-pro&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=cobranca&plano=cobranca-pro&trial=true',
       features: [
         'Até 200 cobranças ativas por mês',
         'Régua ativa multicanal com inteligência preventiva',
@@ -292,7 +292,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 1.668,00/ano)',
       yearlySavings: 'Economize R$ 360 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=cobranca&plano=cobranca-escala&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=cobranca&plano=cobranca-escala&trial=true',
       features: [
         'Até 600 cobranças ativas por mês',
         'Automação completa via Webhooks e API',
@@ -318,7 +318,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 468,00/ano)',
       yearlySavings: 'Economize R$ 120 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=reputacao&plano=reputacao-start&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=reputacao&plano=reputacao-start&trial=true',
       features: [
         'Até 60 solicitações de avaliação por mês',
         'Filtro protetor de satisfação (NPS 1 a 5 estrelas)',
@@ -341,7 +341,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 828,00/ano)',
       yearlySavings: 'Economize R$ 240 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=reputacao&plano=reputacao-pro&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=reputacao&plano=reputacao-pro&trial=true',
       features: [
         'Até 250 solicitações de avaliação por mês',
         'Filtro inteligente protetor de satisfação',
@@ -364,7 +364,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 1.668,00/ano)',
       yearlySavings: 'Economize R$ 360 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=reputacao&plano=reputacao-escala&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=reputacao&plano=reputacao-escala&trial=true',
       features: [
         'Até 750 solicitações de avaliação por mês',
         'Automação completa via Webhooks pós-atendimento',
@@ -390,7 +390,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 468,00/ano)',
       yearlySavings: 'Economize R$ 120 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=ged&plano=ged-start&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=ged&plano=ged-start&trial=true',
       features: [
         'Até 20 GB de armazenamento seguro em nuvem isolada',
         'Organização inteligente de contratos e certidões',
@@ -413,7 +413,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 828,00/ano)',
       yearlySavings: 'Economize R$ 240 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=ged&plano=ged-pro&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=ged&plano=ged-pro&trial=true',
       features: [
         'Até 100 GB de armazenamento seguro criptografado',
         'Leitura OCR e extração inteligente de dados com IA',
@@ -436,7 +436,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
       periodMonthly: '/mês no plano mensal',
       periodYearly: '/mês no plano anual (R$ 1.668,00/ano)',
       yearlySavings: 'Economize R$ 360 no plano anual',
-      checkoutUrl: 'https://hub.alllogiconline.com.br/checkout?modulo=ged&plano=ged-escala&trial=true',
+      checkoutUrl: 'https://hub.agillex.com.br/checkout?modulo=ged&plano=ged-escala&trial=true',
       features: [
         'Até 300 GB de armazenamento seguro criptografado',
         'Processamento em lote de centenas de PDFs com IA',

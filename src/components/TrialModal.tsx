@@ -27,7 +27,7 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
       setSuccess(true);
       setTimeout(() => {
         // Redireciona diretamente para o checkout / ativação de trial do Hub
-        window.location.href = `https://hub.alllogiconline.com.br/checkout?modulo=combo&nome=${encodeURIComponent(name)}&empresa=${encodeURIComponent(company)}&tel=${encodeURIComponent(whatsapp)}`;
+        window.location.href = `https://hub.agillex.com.br/checkout?modulo=combo&nome=${encodeURIComponent(name)}&empresa=${encodeURIComponent(company)}&tel=${encodeURIComponent(whatsapp)}`;
       }, 1500);
     }, 1000);
   };
