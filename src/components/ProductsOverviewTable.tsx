@@ -236,207 +236,202 @@ export default function ProductsOverviewTable({
               backgroundColor: 'rgba(15, 23, 42, 0.55)',
               backdropFilter: 'blur(16px)',
               boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
+              padding: '12px 14px',
             }}
           >
             <table
               style={{
                 width: '100%',
-              borderCollapse: 'collapse',
-              textAlign: 'left',
-              fontSize: '0.9rem',
-            }}
-          >
-            <thead>
-              <tr
-                style={{
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                  backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                }}
-              >
-                <th style={{ padding: '20px 24px', color: '#E2E8F0', fontWeight: 700, width: '240px' }}>
-                  Produto & Categoria
-                </th>
-                <th style={{ padding: '20px 20px', color: '#E2E8F0', fontWeight: 700, minWidth: '220px' }}>
-                  O Que Resolve
-                </th>
-                <th style={{ padding: '20px 20px', color: '#E2E8F0', fontWeight: 700, minWidth: '250px' }}>
-                  Recursos em Destaque
-                </th>
-                <th style={{ padding: '20px 20px', color: '#E2E8F0', fontWeight: 700, minWidth: '180px' }}>
-                  Para Quem É
-                </th>
-                <th style={{ padding: '20px 20px', color: '#E2E8F0', fontWeight: 700, width: '180px' }}>
-                  Contratação
-                </th>
-                <th style={{ padding: '20px 24px', color: '#E2E8F0', fontWeight: 700, width: '160px', textAlign: 'center' }}>
-                  Simulador
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {AGILLEX_PRODUCTS.map((prod, index) => {
-                const Icon = prod.icon;
-                return (
-                  <tr
-                    key={prod.id}
-                    style={{
-                      borderBottom:
-                        index < AGILLEX_PRODUCTS.length - 1
-                          ? '1px solid rgba(255, 255, 255, 0.05)'
-                          : 'none',
-                      transition: 'background-color 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    {/* COLUNA 1: PRODUTO */}
-                    <td style={{ padding: '24px', verticalAlign: 'top' }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                borderCollapse: 'separate',
+                borderSpacing: '0 8px',
+                textAlign: 'left',
+                fontSize: '0.9rem',
+              }}
+            >
+              <thead>
+                <tr>
+                  <th style={{ padding: '16px 20px', color: '#94A3B8', fontWeight: 700, width: '240px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Produto & Categoria
+                  </th>
+                  <th style={{ padding: '16px 16px', color: '#94A3B8', fontWeight: 700, minWidth: '220px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    O Que Resolve
+                  </th>
+                  <th style={{ padding: '16px 16px', color: '#94A3B8', fontWeight: 700, minWidth: '250px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Recursos em Destaque
+                  </th>
+                  <th style={{ padding: '16px 16px', color: '#94A3B8', fontWeight: 700, minWidth: '180px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Para Quem É
+                  </th>
+                  <th style={{ padding: '16px 16px', color: '#94A3B8', fontWeight: 700, width: '180px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Contratação
+                  </th>
+                  <th style={{ padding: '16px 20px', color: '#94A3B8', fontWeight: 700, width: '160px', textAlign: 'center', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Simulador
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {AGILLEX_PRODUCTS.map((prod) => {
+                  const Icon = prod.icon;
+                  return (
+                    <tr
+                      key={prod.id}
+                      className="product-table-row"
+                      onClick={() => onSelectProduct(prod.id)}
+                    >
+                      {/* COLUNA 1: PRODUTO */}
+                      <td style={{ padding: '22px 20px', verticalAlign: 'top' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                          <div
+                            className="row-icon-box"
+                            style={{
+                              width: '44px',
+                              height: '44px',
+                              borderRadius: '12px',
+                              backgroundColor: prod.bgColor,
+                              border: `1px solid ${prod.borderColor}`,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: prod.color,
+                              flexShrink: 0,
+                              transition: 'transform 0.25s ease, filter 0.25s ease',
+                            }}
+                          >
+                            <Icon size={22} />
+                          </div>
+                          <div>
+                            <div
+                              style={{
+                                fontWeight: 800,
+                                fontSize: '1.05rem',
+                                color: '#fff',
+                                marginBottom: '2px',
+                              }}
+                            >
+                              {prod.name}
+                            </div>
+                            <div style={{ fontSize: '0.78rem', color: prod.color, fontWeight: 600 }}>
+                              {prod.category}
+                            </div>
+                            <div
+                              style={{
+                                marginTop: '8px',
+                                display: 'inline-block',
+                                fontSize: '0.68rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.04em',
+                                padding: '2px 8px',
+                                borderRadius: '4px',
+                                backgroundColor: prod.bgColor,
+                                color: prod.color,
+                                border: `1px solid ${prod.borderColor}`,
+                              }}
+                            >
+                              {prod.badge}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* COLUNA 2: O QUE RESOLVE */}
+                      <td style={{ padding: '22px 16px', verticalAlign: 'top', color: '#CBD5E1', lineHeight: 1.5 }}>
+                        <div style={{ fontWeight: 600, color: '#fff', marginBottom: '6px' }}>
+                          {prod.solves}
+                        </div>
+                        <div className="row-text-dim" style={{ fontSize: '0.82rem', color: '#94A3B8', transition: 'color 0.2s' }}>
+                          {prod.tagline}
+                        </div>
+                      </td>
+
+                      {/* COLUNA 3: RECURSOS CHAVE */}
+                      <td style={{ padding: '22px 16px', verticalAlign: 'top' }}>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                          {prod.keyFeatures.map((feat, fIdx) => (
+                            <li
+                              key={fIdx}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: '8px',
+                                fontSize: '0.82rem',
+                                lineHeight: 1.4,
+                              }}
+                            >
+                              <CheckCircle2
+                                size={14}
+                                color={prod.color}
+                                style={{ flexShrink: 0, marginTop: '2px' }}
+                              />
+                              <span className="row-text-dim" style={{ color: '#94A3B8', transition: 'color 0.2s' }}>
+                                {feat}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+
+                      {/* COLUNA 4: PÚBLICO */}
+                      <td style={{ padding: '22px 16px', verticalAlign: 'top', fontSize: '0.82rem', lineHeight: 1.5 }}>
+                        <span className="row-text-dim" style={{ color: '#94A3B8', fontWeight: 500, transition: 'color 0.2s' }}>
+                          {prod.audience}
+                        </span>
+                      </td>
+
+                      {/* COLUNA 5: CONTRATAÇÃO & PREÇO */}
+                      <td style={{ padding: '22px 16px', verticalAlign: 'top' }}>
+                        <div style={{ fontWeight: 700, color: '#00F5D4', fontSize: '0.95rem', marginBottom: '4px' }}>
+                          {prod.pricing}
+                        </div>
+                        <div className="row-text-dim" style={{ fontSize: '0.75rem', color: '#64748B', lineHeight: 1.4, transition: 'color 0.2s' }}>
+                          {prod.availability}
+                        </div>
                         <div
                           style={{
-                            width: '44px',
-                            height: '44px',
-                            borderRadius: '12px',
-                            backgroundColor: prod.bgColor,
-                            border: `1px solid ${prod.borderColor}`,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: prod.color,
-                            flexShrink: 0,
+                            marginTop: '6px',
+                            fontSize: '0.72rem',
+                            color: '#38BDF8',
+                            fontWeight: 600,
                           }}
                         >
-                          <Icon size={22} />
+                          ✓ {prod.trialDays}
                         </div>
-                        <div>
-                          <div
-                            style={{
-                              fontWeight: 800,
-                              fontSize: '1.05rem',
-                              color: '#fff',
-                              marginBottom: '2px',
-                            }}
-                          >
-                            {prod.name}
-                          </div>
-                          <div style={{ fontSize: '0.78rem', color: prod.color, fontWeight: 600 }}>
-                            {prod.category}
-                          </div>
-                          <div
-                            style={{
-                              marginTop: '8px',
-                              display: 'inline-block',
-                              fontSize: '0.68rem',
-                              fontWeight: 700,
-                              letterSpacing: '0.04em',
-                              padding: '2px 8px',
-                              borderRadius: '4px',
-                              backgroundColor: prod.bgColor,
-                              color: prod.color,
-                              border: `1px solid ${prod.borderColor}`,
-                            }}
-                          >
-                            {prod.badge}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
+                      </td>
 
-                    {/* COLUNA 2: O QUE RESOLVE */}
-                    <td style={{ padding: '24px 20px', verticalAlign: 'top', color: '#CBD5E1', lineHeight: 1.5 }}>
-                      <div style={{ fontWeight: 600, color: '#fff', marginBottom: '6px' }}>
-                        {prod.solves}
-                      </div>
-                      <div style={{ fontSize: '0.8rem', color: '#94A3B8' }}>
-                        {prod.tagline}
-                      </div>
-                    </td>
-
-                    {/* COLUNA 3: RECURSOS CHAVE */}
-                    <td style={{ padding: '24px 20px', verticalAlign: 'top' }}>
-                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        {prod.keyFeatures.map((feat, fIdx) => (
-                          <li
-                            key={fIdx}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'flex-start',
-                              gap: '8px',
-                              fontSize: '0.82rem',
-                              color: '#94A3B8',
-                              lineHeight: 1.4,
-                            }}
-                          >
-                            <CheckCircle2
-                              size={14}
-                              color={prod.color}
-                              style={{ flexShrink: 0, marginTop: '2px' }}
-                            />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-
-                    {/* COLUNA 4: PÚBLICO */}
-                    <td style={{ padding: '24px 20px', verticalAlign: 'top', color: '#94A3B8', fontSize: '0.82rem', lineHeight: 1.5 }}>
-                      <span style={{ color: '#E2E8F0', fontWeight: 500 }}>{prod.audience}</span>
-                    </td>
-
-                    {/* COLUNA 5: CONTRATAÇÃO & PREÇO */}
-                    <td style={{ padding: '24px 20px', verticalAlign: 'top' }}>
-                      <div style={{ fontWeight: 700, color: '#00F5D4', fontSize: '0.92rem', marginBottom: '4px' }}>
-                        {prod.pricing}
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: '#64748B', lineHeight: 1.4 }}>
-                        {prod.availability}
-                      </div>
-                      <div
-                        style={{
-                          marginTop: '6px',
-                          fontSize: '0.72rem',
-                          color: '#38BDF8',
-                          fontWeight: 600,
-                        }}
-                      >
-                        ✓ {prod.trialDays}
-                      </div>
-                    </td>
-
-                    {/* COLUNA 6: AÇÃO INTERATIVA */}
-                    <td style={{ padding: '24px', verticalAlign: 'middle', textAlign: 'center' }}>
-                      <button
-                        onClick={() => onSelectProduct(prod.id)}
-                        className="cyber-button-secondary"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          padding: '10px 16px',
-                          borderRadius: '10px',
-                          fontSize: '0.82rem',
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          whiteSpace: 'nowrap',
-                          width: '100%',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <span>Testar ao Vivo</span>
-                        <ArrowRight size={14} />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </ScrollReveal>
+                      {/* COLUNA 6: AÇÃO INTERATIVA */}
+                      <td style={{ padding: '22px 20px', verticalAlign: 'middle', textAlign: 'center' }}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectProduct(prod.id);
+                          }}
+                          className="cyber-button-secondary row-action-btn"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            padding: '10px 16px',
+                            borderRadius: '10px',
+                            fontSize: '0.82rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            whiteSpace: 'nowrap',
+                            width: '100%',
+                            justifyContent: 'center',
+                            transition: 'all 0.25s ease',
+                          }}
+                        >
+                          <span>Testar ao Vivo</span>
+                          <ArrowRight size={14} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </ScrollReveal>
 
         {/* VERSÃO MOBILE: CARDS RESPONSIVOS (Exibidos em telas pequenas) */}
         <div className="mobile-cards-container" style={{ display: 'none', flexDirection: 'column', gap: '16px' }}>
@@ -564,6 +559,60 @@ export default function ProductsOverviewTable({
       </div>
 
       <style jsx>{`
+        @media (min-width: 901px) {
+          .desktop-table-container {
+            overflow: visible !important;
+          }
+          .product-table-row {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+          }
+          .product-table-row td {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, padding 0.25s ease;
+          }
+          .product-table-row td:first-child {
+            border-left: 2px solid rgba(255, 255, 255, 0.06);
+            border-top-left-radius: 14px;
+            border-bottom-left-radius: 14px;
+          }
+          .product-table-row td:last-child {
+            border-right: 2px solid rgba(255, 255, 255, 0.06);
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+          }
+          .product-table-row:hover {
+            transform: scale(1.022);
+            position: relative;
+            z-index: 30;
+          }
+          .product-table-row:hover td {
+            background-color: rgba(18, 30, 58, 0.98) !important;
+            border-color: rgba(0, 245, 212, 0.45) !important;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 245, 212, 0.18);
+          }
+          .product-table-row:hover td:first-child {
+            border-left: 4px solid #00F5D4 !important;
+          }
+          .product-table-row:hover .row-text-dim {
+            color: #F8FAFC !important;
+          }
+          .product-table-row:hover .row-icon-box {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(0, 245, 212, 0.5));
+          }
+          .product-table-row:hover .row-action-btn {
+            background: #00F5D4 !important;
+            color: #050B14 !important;
+            border-color: #00F5D4 !important;
+            box-shadow: 0 0 18px rgba(0, 245, 212, 0.6) !important;
+            font-weight: 800 !important;
+          }
+        }
+
         @media (max-width: 900px) {
           .desktop-table-container {
             display: none !important;
