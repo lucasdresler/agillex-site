@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import ScrollReveal from '@/components/ScrollReveal';
 import {
   Calendar,
   Bot,
@@ -169,74 +170,77 @@ export default function ProductsOverviewTable({
       }}
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        {/* CABEÇALHO DA SEÇÃO */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div className="cyber-badge" style={{ marginBottom: '16px' }}>
-            <Sparkles size={14} color="#00F5D4" />
-            <span>Ecossistema Modular • 6 Soluções Independentes ou 100% Integradas</span>
+        {/* CABEÇALHO DA SEÇÃO (DESCENDO SUAVEMENTE) */}
+        <ScrollReveal direction="down" distance={40}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div className="cyber-badge" style={{ marginBottom: '16px' }}>
+              <Sparkles size={14} color="#00F5D4" />
+              <span>Ecossistema Modular • 6 Soluções Independentes ou 100% Integradas</span>
+            </div>
+
+            <h2
+              style={{
+                fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                marginBottom: '16px',
+              }}
+            >
+              Conheça os 6 Produtos da{' '}
+              <span className="gradient-text-glow">Família Agillex.</span>
+            </h2>
+
+            <p
+              style={{
+                color: '#94A3B8',
+                fontSize: '1.08rem',
+                maxWidth: '820px',
+                margin: '0 auto 24px',
+                lineHeight: 1.6,
+              }}
+            >
+              Não force sua empresa a pagar por ferramentas que você não vai usar. Na Agillex,{' '}
+              <strong style={{ color: '#00F5D4' }}>cada produto funciona de forma independente</strong>{' '}
+              com contratação avulsa (a partir de R$ 49,90/mês) — ou você pode unificar tudo com economia máxima no{' '}
+              <strong style={{ color: '#38BDF8' }}>Combo Agillex Hub</strong>.
+            </p>
+
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                backgroundColor: 'rgba(0, 245, 212, 0.08)',
+                border: '1px solid rgba(0, 245, 212, 0.25)',
+                borderRadius: '999px',
+                padding: '8px 20px',
+                fontSize: '0.85rem',
+                color: '#00F5D4',
+                fontWeight: 600,
+              }}
+            >
+              <Zap size={16} />
+              <span>Escolha um produto abaixo para testar o simulador interativo em tempo real</span>
+            </div>
           </div>
+        </ScrollReveal>
 
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
-              fontWeight: 800,
-              letterSpacing: '-0.02em',
-              marginBottom: '16px',
-            }}
-          >
-            Conheça os 6 Produtos da{' '}
-            <span className="gradient-text-glow">Família Agillex.</span>
-          </h2>
-
-          <p
-            style={{
-              color: '#94A3B8',
-              fontSize: '1.08rem',
-              maxWidth: '820px',
-              margin: '0 auto 24px',
-              lineHeight: 1.6,
-            }}
-          >
-            Não force sua empresa a pagar por ferramentas que você não vai usar. Na Agillex,{' '}
-            <strong style={{ color: '#00F5D4' }}>cada produto funciona de forma independente</strong>{' '}
-            com contratação avulsa (a partir de R$ 49,90/mês) — ou você pode unificar tudo com economia máxima no{' '}
-            <strong style={{ color: '#38BDF8' }}>Combo Agillex Hub</strong>.
-          </p>
-
+        {/* TABELA COMPARATIVA DESKTOP (SUBINDO SUAVEMENTE COM EFEITO DE VIDRO) */}
+        <ScrollReveal direction="up" distance={50} delay={150}>
           <div
+            className="desktop-table-container"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '12px',
-              backgroundColor: 'rgba(0, 245, 212, 0.08)',
-              border: '1px solid rgba(0, 245, 212, 0.25)',
-              borderRadius: '999px',
-              padding: '8px 20px',
-              fontSize: '0.85rem',
-              color: '#00F5D4',
-              fontWeight: 600,
+              overflowX: 'auto',
+              borderRadius: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              backgroundColor: 'rgba(15, 23, 42, 0.55)',
+              backdropFilter: 'blur(16px)',
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
             }}
           >
-            <Zap size={16} />
-            <span>Escolha um produto abaixo para testar o simulador interativo em tempo real</span>
-          </div>
-        </div>
-
-        {/* TABELA COMPARATIVA DESKTOP (Exibida em telas grandes) */}
-        <div
-          className="desktop-table-container"
-          style={{
-            overflowX: 'auto',
-            borderRadius: '24px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            backgroundColor: 'rgba(15, 23, 42, 0.55)',
-            backdropFilter: 'blur(16px)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          <table
-            style={{
-              width: '100%',
+            <table
+              style={{
+                width: '100%',
               borderCollapse: 'collapse',
               textAlign: 'left',
               fontSize: '0.9rem',
@@ -432,6 +436,7 @@ export default function ProductsOverviewTable({
             </tbody>
           </table>
         </div>
+      </ScrollReveal>
 
         {/* VERSÃO MOBILE: CARDS RESPONSIVOS (Exibidos em telas pequenas) */}
         <div className="mobile-cards-container" style={{ display: 'none', flexDirection: 'column', gap: '16px' }}>
@@ -523,36 +528,39 @@ export default function ProductsOverviewTable({
         </div>
 
         {/* BANNER INFORMATIVO FINAL */}
-        <div
-          style={{
-            marginTop: '36px',
-            padding: '24px 30px',
-            borderRadius: '18px',
-            backgroundColor: 'rgba(31, 111, 255, 0.06)',
-            border: '1px solid rgba(31, 111, 255, 0.2)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '20px',
-          }}
-        >
-          <div>
-            <div style={{ fontWeight: 800, color: '#fff', fontSize: '1.05rem', marginBottom: '4px' }}>
-              Dúvida sobre qual combinação faz mais sentido para o seu negócio?
-            </div>
-            <div style={{ color: '#94A3B8', fontSize: '0.88rem' }}>
-              Comece agora com 14 dias gratuitos no módulo de sua escolha. Não pedimos cartão de crédito e você pode alterar ou migrar a qualquer momento.
-            </div>
-          </div>
-          <button
-            onClick={onOpenTrial}
-            className="btn-primary-neon"
-            style={{ padding: '12px 28px', fontSize: '0.9rem', whiteSpace: 'nowrap' }}
+        <ScrollReveal direction="up" distance={40} delay={100}>
+          <div
+            className="shine-hover card-hover-kinetic"
+            style={{
+              marginTop: '36px',
+              padding: '24px 30px',
+              borderRadius: '18px',
+              backgroundColor: 'rgba(31, 111, 255, 0.06)',
+              border: '1px solid rgba(31, 111, 255, 0.2)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '20px',
+            }}
           >
-            Iniciar Demonstração Gratuita
-          </button>
-        </div>
+            <div>
+              <div style={{ fontWeight: 800, color: '#fff', fontSize: '1.05rem', marginBottom: '4px' }}>
+                Dúvida sobre qual combinação faz mais sentido para o seu negócio?
+              </div>
+              <div style={{ color: '#94A3B8', fontSize: '0.88rem' }}>
+                Comece agora com 14 dias gratuitos no módulo de sua escolha. Não pedimos cartão de crédito e você pode alterar ou migrar a qualquer momento.
+              </div>
+            </div>
+            <button
+              onClick={onOpenTrial}
+              className="btn-primary-neon shine-hover"
+              style={{ padding: '12px 28px', fontSize: '0.9rem', whiteSpace: 'nowrap' }}
+            >
+              Iniciar Demonstração Gratuita
+            </button>
+          </div>
+        </ScrollReveal>
       </div>
 
       <style jsx>{`

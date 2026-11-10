@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ScrollReveal from '@/components/ScrollReveal';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
 export default function FaqSection() {
@@ -36,68 +37,77 @@ export default function FaqSection() {
   return (
     <section id="faq" style={{ padding: '80px 24px', position: 'relative' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div className="cyber-badge" style={{ marginBottom: '14px' }}>
-            <span>Perguntas Frequentes</span>
+        <ScrollReveal direction="down" distance={40}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div className="cyber-badge" style={{ marginBottom: '14px' }}>
+              <span>Perguntas Frequentes</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '16px' }}>
+              Dúvidas Frequentes sobre a{' '}
+              <span className="gradient-text-cyan">Família Agillex</span>
+            </h2>
+            <p style={{ color: '#94A3B8', fontSize: '1rem' }}>
+              Tudo o que você precisa saber sobre funcionamento, conexões e segurança.
+            </p>
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '16px' }}>
-            Dúvidas Frequentes sobre a{' '}
-            <span className="gradient-text-cyan">Família Agillex</span>
-          </h2>
-          <p style={{ color: '#94A3B8', fontSize: '1rem' }}>
-            Tudo o que você precisa saber sobre funcionamento, conexões e segurança.
-          </p>
-        </div>
+        </ScrollReveal>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
-              <div
+              <ScrollReveal
                 key={idx}
-                style={{
-                  backgroundColor: 'rgba(10, 17, 40, 0.7)',
-                  border: isOpen ? '1px solid #00F5D4' : '1px solid rgba(56, 189, 248, 0.15)',
-                  borderRadius: '14px',
-                  overflow: 'hidden',
-                  transition: 'all 0.25s ease',
-                }}
+                direction={idx % 2 === 0 ? 'left' : 'right'}
+                distance={60}
+                delay={idx * 60}
               >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                <div
+                  className="card-hover-kinetic"
                   style={{
-                    width: '100%',
-                    padding: '20px 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: '#fff',
-                    textAlign: 'left',
-                    fontSize: '1rem',
-                    fontWeight: 600,
+                    backgroundColor: 'rgba(10, 17, 40, 0.7)',
+                    border: isOpen ? '1px solid #00F5D4' : '1px solid rgba(56, 189, 248, 0.15)',
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    transition: 'all 0.25s ease',
                   }}
                 >
-                  <span style={{ paddingRight: '16px' }}>{faq.q}</span>
-                  <ChevronDown
-                    size={20}
-                    color={isOpen ? '#00F5D4' : '#64748B'}
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : idx)}
                     style={{
-                      transform: isOpen ? 'rotate(180deg)' : 'none',
-                      transition: 'transform 0.2s',
-                      flexShrink: 0,
+                      width: '100%',
+                      padding: '20px 24px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: '#fff',
+                      textAlign: 'left',
+                      fontSize: '1rem',
+                      fontWeight: 600,
                     }}
-                  />
-                </button>
+                  >
+                    <span style={{ paddingRight: '16px' }}>{faq.q}</span>
+                    <ChevronDown
+                      size={20}
+                      color={isOpen ? '#00F5D4' : '#64748B'}
+                      style={{
+                        transform: isOpen ? 'rotate(180deg)' : 'none',
+                        transition: 'transform 0.2s',
+                        flexShrink: 0,
+                      }}
+                    />
+                  </button>
 
-                {isOpen && (
-                  <div style={{ padding: '0 24px 20px', color: '#94A3B8', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                    {faq.a}
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div style={{ padding: '0 24px 20px', color: '#94A3B8', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>

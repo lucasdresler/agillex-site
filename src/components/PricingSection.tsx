@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ScrollReveal from '@/components/ScrollReveal';
 import {
   Check,
   Sparkles,
@@ -464,88 +465,89 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
   return (
     <section id="planos" style={{ padding: '80px 24px', position: 'relative' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div className="cyber-badge" style={{ marginBottom: '14px' }}>
-            <span>Tabela Oficial de Preços AllLogic Online</span>
-          </div>
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 3.8vw, 3rem)',
-              fontWeight: 800,
-              letterSpacing: '-0.02em',
-              marginBottom: '16px',
-            }}
-          >
-            Planos Oficiais.{' '}
-            <span className="gradient-text-glow">Sem pegadinhas ou custos ocultos.</span>
-          </h2>
-          <p
-            style={{
-              color: '#94A3B8',
-              fontSize: '1.05rem',
-              maxWidth: '750px',
-              margin: '0 auto 28px',
-            }}
-          >
-            Acesso a 100% dos recursos em todos os planos. Escolha contratar o módulo avulso ou a
-            solução completa no Combo Agillex Hub.
-          </p>
-
-          {/* SELETOR DE CATEGORIA DE PRODUTO */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '8px',
-              marginBottom: '20px',
-            }}
-          >
-            <button
-              onClick={() => setActiveCategory('combo')}
+        <ScrollReveal direction="down" distance={40}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <div className="cyber-badge" style={{ marginBottom: '14px' }}>
+              <span>Tabela Oficial de Preços AllLogic Online</span>
+            </div>
+            <h2
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 18px',
-                borderRadius: '12px',
-                backgroundColor:
-                  activeCategory === 'combo' ? 'rgba(0, 245, 212, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                border:
-                  activeCategory === 'combo' ? '1px solid #00F5D4' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: activeCategory === 'combo' ? '#fff' : '#94A3B8',
-                fontWeight: activeCategory === 'combo' ? 700 : 500,
-                fontSize: '0.88rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
+                fontSize: 'clamp(2rem, 3.8vw, 3rem)',
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                marginBottom: '16px',
               }}
             >
-              <LayoutDashboard size={16} color={activeCategory === 'combo' ? '#00F5D4' : '#64748B'} />
-              Combo Agillex Hub
-            </button>
-
-            <button
-              onClick={() => setActiveCategory('agenda')}
+              Planos Oficiais.{' '}
+              <span className="gradient-text-glow">Sem pegadinhas ou custos ocultos.</span>
+            </h2>
+            <p
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 18px',
-                borderRadius: '12px',
-                backgroundColor:
-                  activeCategory === 'agenda' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                border:
-                  activeCategory === 'agenda' ? '1px solid #38BDF8' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: activeCategory === 'agenda' ? '#fff' : '#94A3B8',
-                fontWeight: activeCategory === 'agenda' ? 700 : 500,
-                fontSize: '0.88rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
+                color: '#94A3B8',
+                fontSize: '1.05rem',
+                maxWidth: '750px',
+                margin: '0 auto 28px',
               }}
             >
-              <Calendar size={16} color={activeCategory === 'agenda' ? '#38BDF8' : '#64748B'} />
-              Agillex Agenda
-            </button>
+              Acesso a 100% dos recursos em todos os planos. Escolha contratar o módulo avulso ou a
+              solução completa no Combo Agillex Hub.
+            </p>
+
+            {/* SELETOR DE CATEGORIA DE PRODUTO */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                gap: '8px',
+                marginBottom: '20px',
+              }}
+            >
+              <button
+                onClick={() => setActiveCategory('combo')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  borderRadius: '12px',
+                  backgroundColor:
+                    activeCategory === 'combo' ? 'rgba(0, 245, 212, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                  border:
+                    activeCategory === 'combo' ? '1px solid #00F5D4' : '1px solid rgba(255, 255, 255, 0.1)',
+                  color: activeCategory === 'combo' ? '#fff' : '#94A3B8',
+                  fontWeight: activeCategory === 'combo' ? 700 : 500,
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <LayoutDashboard size={16} color={activeCategory === 'combo' ? '#00F5D4' : '#64748B'} />
+                Combo Agillex Hub
+              </button>
+
+              <button
+                onClick={() => setActiveCategory('agenda')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  borderRadius: '12px',
+                  backgroundColor:
+                    activeCategory === 'agenda' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                  border:
+                    activeCategory === 'agenda' ? '1px solid #38BDF8' : '1px solid rgba(255, 255, 255, 0.1)',
+                  color: activeCategory === 'agenda' ? '#fff' : '#94A3B8',
+                  fontWeight: activeCategory === 'agenda' ? 700 : 500,
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <Calendar size={16} color={activeCategory === 'agenda' ? '#38BDF8' : '#64748B'} />
+                Agillex Agenda
+              </button>
 
             <button
               onClick={() => setActiveCategory('atende')}
@@ -700,6 +702,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
             </button>
           </div>
         </div>
+      </ScrollReveal>
 
         {/* GRID DE PLANOS */}
         <div
@@ -720,32 +723,40 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
               billingCycle === 'monthly' ? plan.periodMonthly : plan.periodYearly;
 
             return (
-              <div
+              <ScrollReveal
                 key={idx}
-                className="cyber-card"
-                style={{
-                  padding: '36px 30px',
-                  borderRadius: '24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative',
-                  border: plan.popular
-                    ? '1.5px solid rgba(0, 245, 212, 0.5)'
-                    : '1px solid rgba(255, 255, 255, 0.08)',
-                  background: plan.popular
-                    ? 'linear-gradient(180deg, rgba(0, 245, 212, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%)'
-                    : 'rgba(15, 23, 42, 0.5)',
-                  boxShadow: plan.popular
-                    ? '0 0 40px rgba(0, 245, 212, 0.12)'
-                    : 'none',
-                }}
+                direction={idx === 0 ? 'left' : idx === 1 ? 'zoom' : 'right'}
+                distance={60}
+                delay={idx * 120}
+                style={{ display: 'flex', height: '100%' }}
               >
-                {plan.badge && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '-13px',
-                      left: '50%',
+                <div
+                  className={`cyber-card shine-hover card-hover-kinetic ${plan.popular ? 'border-beam-active' : ''}`}
+                  style={{
+                    width: '100%',
+                    padding: '36px 30px',
+                    borderRadius: '24px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                    border: plan.popular
+                      ? '1.5px solid rgba(0, 245, 212, 0.6)'
+                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    background: plan.popular
+                      ? 'linear-gradient(180deg, rgba(0, 245, 212, 0.07) 0%, rgba(15, 23, 42, 0.7) 100%)'
+                      : 'rgba(15, 23, 42, 0.5)',
+                    boxShadow: plan.popular
+                      ? '0 0 40px rgba(0, 245, 212, 0.18)'
+                      : 'none',
+                  }}
+                >
+                  {plan.badge && (
+                    <div
+                      className={plan.popular ? 'neon-pulse' : ''}
+                      style={{
+                        position: 'absolute',
+                        top: '-13px',
+                        left: '50%',
                       transform: 'translateX(-50%)',
                       background: plan.popular
                         ? 'linear-gradient(135deg, #00F5D4, #1F6FFF)'
@@ -875,50 +886,54 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
                   </ul>
                 </div>
               </div>
+            </ScrollReveal>
             );
           })}
         </div>
 
-        {/* NOTA DE CONFIANÇA */}
-        <div
-          style={{
-            marginTop: '48px',
-            padding: '24px',
-            borderRadius: '16px',
-            backgroundColor: 'rgba(255, 255, 255, 0.02)',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '16px',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <ShieldCheck size={28} color="#00F5D4" />
-            <div>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: '0.95rem' }}>
-                Garantia de 14 Dias de Teste Grátis
-              </div>
-              <div style={{ color: '#94A3B8', fontSize: '0.82rem' }}>
-                Sem necessidade de cadastrar cartão de crédito. Cancele quando quiser sem multas ou fidelidade.
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={onOpenTrial}
-            className="cyber-button-secondary"
+        {/* NOTA DE CONFIANÇA (SUBINDO SUAVEMENTE) */}
+        <ScrollReveal direction="up" distance={40} delay={150}>
+          <div
+            className="shine-hover card-hover-kinetic"
             style={{
-              padding: '10px 22px',
-              borderRadius: '10px',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
+              marginTop: '48px',
+              padding: '24px',
+              borderRadius: '16px',
+              backgroundColor: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px',
             }}
           >
-            Ativar Demonstração Imediata
-          </button>
-        </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <ShieldCheck size={28} color="#00F5D4" />
+              <div>
+                <div style={{ fontWeight: 700, color: '#fff', fontSize: '0.95rem' }}>
+                  Garantia de 14 Dias de Teste Grátis
+                </div>
+                <div style={{ color: '#94A3B8', fontSize: '0.82rem' }}>
+                  Sem necessidade de cadastrar cartão de crédito. Cancele quando quiser sem multas ou fidelidade.
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={onOpenTrial}
+              className="cyber-button-secondary shine-hover"
+              style={{
+                padding: '10px 22px',
+                borderRadius: '10px',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+              }}
+            >
+              Ativar Demonstração Imediata
+            </button>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

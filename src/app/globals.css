@@ -179,3 +179,107 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 245, 212, 0.5);
 }
+
+/* ==============================================================================
+   SUÍTE DE ANIMAÇÕES VISUAIS & EFEITOS DINÂMICOS GLOBAIS (AGILLEX 2026)
+   ============================================================================== */
+
+/* Brilho pulsante suave em badges */
+@keyframes neon-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.25);
+    border-color: rgba(0, 245, 212, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 245, 212, 0.6);
+    border-color: rgba(0, 245, 212, 0.85);
+  }
+}
+.neon-pulse {
+  animation: neon-glow-pulse 3s infinite ease-in-out;
+}
+
+/* Flutuação contínua suave (Float) */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes float-gentle-reverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.float-slow {
+  animation: float-gentle 4.5s infinite ease-in-out;
+}
+
+.float-slow-reverse {
+  animation: float-gentle-reverse 5s infinite ease-in-out;
+}
+
+/* Efeito Shine Sweep (Feixe de luz diagonal passando no hover) */
+.shine-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(0, 245, 212, 0.18) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: all 0.75s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.shine-hover:hover::before {
+  left: 140%;
+}
+
+/* Card 3D Lift com iluminação de borda no Hover */
+.card-hover-kinetic {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease !important;
+}
+
+.card-hover-kinetic:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 212, 0.2) !important;
+  border-color: rgba(0, 245, 212, 0.5) !important;
+}
+
+/* Borda luminosa giratória contínua (Border Beam) */
+@keyframes border-beam-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.border-beam-active {
+  animation: border-beam-rotate 8s linear infinite;
+}
+

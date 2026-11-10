@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ScrollReveal from '@/components/ScrollReveal';
 import {
   Bot,
   Calendar,
@@ -139,79 +140,85 @@ export default function ProductNavigator({
     <section id="produtos" style={{ padding: '80px 24px', position: 'relative' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* CABEÇALHO DA SEÇÃO */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div className="cyber-badge" style={{ marginBottom: '14px' }}>
-            <span>Ecossistema Modular Integrado</span>
+        <ScrollReveal direction="down" distance={40}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div className="cyber-badge" style={{ marginBottom: '14px' }}>
+              <span>Ecossistema Modular Integrado</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '16px' }}>
+              Seis Motores Inteligentes.{' '}
+              <span className="gradient-text-cyan">Uma Só Experiência.</span>
+            </h2>
+            <p style={{ color: '#94A3B8', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto' }}>
+              Cada solução opera com perfeição de forma avulsa ou integrada ao ecossistema unificado da Família Agillex.
+              Explore os recursos ao vivo abaixo:
+            </p>
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '16px' }}>
-            Seis Motores Inteligentes.{' '}
-            <span className="gradient-text-cyan">Uma Só Experiência.</span>
-          </h2>
-          <p style={{ color: '#94A3B8', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto' }}>
-            Cada solução opera com perfeição de forma avulsa ou integrada ao ecossistema unificado da Família Agillex.
-            Explore os recursos ao vivo abaixo:
-          </p>
-        </div>
+        </ScrollReveal>
 
         {/* BARRA DE NAVEGAÇÃO DOS PRODUTOS (ABAS FUTURISTAS) */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '10px',
-            marginBottom: '40px',
-          }}
-        >
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '12px 20px',
-                  borderRadius: '12px',
-                  backgroundColor: isActive ? 'rgba(31, 111, 255, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                  border: isActive ? `1px solid ${tab.color}` : '1px solid rgba(255, 255, 255, 0.1)',
-                  boxShadow: isActive ? `0 0 20px ${tab.color}33` : 'none',
-                  color: isActive ? '#fff' : '#94A3B8',
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: '0.88rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.25s ease',
-                }}
-              >
-                <Icon size={18} color={tab.color} />
-                <span>{tab.name}</span>
-                <span
+        <ScrollReveal direction="down" distance={30} delay={100}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '10px',
+              marginBottom: '40px',
+            }}
+          >
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className="card-hover-kinetic"
                   style={{
-                    fontSize: '0.62rem',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    backgroundColor: isActive ? `${tab.color}22` : 'rgba(255, 255, 255, 0.05)',
-                    color: isActive ? tab.color : '#64748B',
-                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    backgroundColor: isActive ? 'rgba(31, 111, 255, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                    border: isActive ? `1px solid ${tab.color}` : '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: isActive ? `0 0 20px ${tab.color}33` : 'none',
+                    color: isActive ? '#fff' : '#94A3B8',
+                    fontWeight: isActive ? 700 : 500,
+                    fontSize: '0.88rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
                   }}
                 >
-                  {tab.tag}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  <Icon size={18} color={tab.color} />
+                  <span>{tab.name}</span>
+                  <span
+                    style={{
+                      fontSize: '0.62rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      backgroundColor: isActive ? `${tab.color}22` : 'rgba(255, 255, 255, 0.05)',
+                      color: isActive ? tab.color : '#64748B',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {tab.tag}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </ScrollReveal>
 
         {/* CONTAINER DINÂMICO DO PRODUTO ATIVO */}
-        <div
-          className="glass-card"
-          style={{
-            padding: '36px',
-            borderRadius: '24px',
+        <ScrollReveal direction="zoom" distance={40} delay={180}>
+          <div
+            className="glass-card shine-hover"
+            style={{
+              padding: '36px',
+              borderRadius: '24px',
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -881,6 +888,7 @@ export default function ProductNavigator({
             </div>
           )}
         </div>
+      </ScrollReveal>
       </div>
     </section>
   );
