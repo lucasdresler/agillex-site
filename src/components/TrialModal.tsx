@@ -263,7 +263,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
                     <p style={{ margin: 0 }}>{errorMsg}</p>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '8px' }}>
                       <a
-                        href={`${HUB_URL}/login?email=${encodeURIComponent(email.trim())}`}
+                        href={`${HUB_URL}/login?email=${encodeURIComponent(email.trim())}&switch=true`}
                         style={{ color: '#67E8F9', fontWeight: 700 }}
                       >
                         Acessar minha conta
@@ -329,7 +329,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
               Seus 14 dias de <strong style={{ color: '#fff' }}>{currentPlan.name}</strong> já estão valendo. Enviamos a senha provisória para o WhatsApp informado.
             </p>
             <a
-              href={`${HUB_URL}/login?email=${encodeURIComponent(email)}`}
+              href={`${HUB_URL}/login?email=${encodeURIComponent(email)}&switch=true`}
               className="btn-primary-neon"
               style={{ display: 'inline-flex', justifyContent: 'center', padding: '14px 24px', textDecoration: 'none' }}
             >
