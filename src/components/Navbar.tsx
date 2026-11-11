@@ -247,7 +247,7 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
         {/* AÇÕES DIREITAS DESKTOP */}
         <div style={{ display: 'none', alignItems: 'center', gap: '14px' }} className="desktop-nav">
           <a
-            href="https://hub.agillex.com.br/login"
+            href="https://hub.agillex.com.br/login?switch=true"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -355,7 +355,7 @@ export default function Navbar({ onOpenTrial }: NavbarProps) {
           </button>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
             <a
-              href="https://hub.agillex.com.br/login"
+              href="https://hub.agillex.com.br/login?switch=true"
               target="_blank"
               rel="noopener noreferrer"
               style={{

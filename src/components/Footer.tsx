@@ -99,7 +99,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
                 <a
-                  href="https://hub.agillex.com.br/login"
+                  href="https://hub.agillex.com.br/login?switch=true"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-link"
