@@ -27,7 +27,15 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
       setSuccess(true);
       setTimeout(() => {
         // Redireciona diretamente para o checkout / ativação de trial do Hub
-        window.location.href = `https://hub.agillex.com.br/checkout?modulo=combo&nome=${encodeURIComponent(name)}&empresa=${encodeURIComponent(company)}&tel=${encodeURIComponent(whatsapp)}`;
+        const params = new URLSearchParams({
+          modulo: 'combo',
+          plano: 'combo',
+          trial: 'true',
+          nome: name,
+          empresa: company,
+          tel: whatsapp,
+        });
+        window.location.href = `https://hub.agillex.com.br/checkout?${params.toString()}`;
       }, 1500);
     }, 1000);
   };
@@ -202,10 +210,10 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
               <Check size={32} />
             </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
-              Ambiente Liberado com Sucesso!
+              Vamos concluir seu cadastro!
             </h3>
             <p style={{ fontSize: '0.9rem', color: '#94A3B8', marginBottom: '20px' }}>
-              Redirecionando você para o painel do Agillex Hub...
+              Redirecionando você para informar seu e-mail e finalizar a ativação do teste grátis, sem cartão.
             </p>
             <Loader2 size={24} className="spin-slow" style={{ color: '#00F5D4', margin: '0 auto' }} />
           </div>
