@@ -41,6 +41,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
   const [planId, setPlanId] = useState('combo');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [accountExists, setAccountExists] = useState(false);
   const [success, setSuccess] = useState(false);
 
   // Ao abrir, pré-seleciona o produto/variante do CTA que foi clicado
@@ -51,6 +52,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
     setProductId(product.id);
     setPlanId(plan.id);
     setErrorMsg('');
+    setAccountExists(false);
     setSuccess(false);
   }, [isOpen, initialProduct, initialPlan]);
 
@@ -69,6 +71,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
     e.preventDefault();
     setLoading(true);
     setErrorMsg('');
+    setAccountExists(false);
 
     try {
       // Cadastro do teste grátis direto no Hub: sem cartão e sem etapa de pagamento
@@ -86,6 +89,11 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        if (res.status === 409) {
+          setAccountExists(true);
+          setErrorMsg('Este e-mail já possui uma conta no Agillex Hub. Acesse sua conta ou fale com o suporte se precisar recuperar o acesso.');
+          return;
+        }
         throw new Error(data.error || 'Não foi possível concluir o cadastro. Tente novamente.');
       }
       setSuccess(true);
@@ -223,10 +231,54 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
                   required
                   autoComplete="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  aria-invalid={accountExists}
+                  aria-describedby={accountExists ? 'trial-email-error' : undefined}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (accountExists) {
+                      setAccountExists(false);
+                      setErrorMsg('');
+                    }
+                  }}
                   placeholder="voce@empresa.com.br"
-                  style={fieldStyle}
+                  style={{
+                    ...fieldStyle,
+                    border: accountExists ? '1px solid #F87171' : fieldStyle.border,
+                  }}
                 />
+                {accountExists && (
+                  <div
+                    id="trial-email-error"
+                    role="alert"
+                    style={{
+                      fontSize: '0.78rem',
+                      color: '#FCA5A5',
+                      backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                      border: '1px solid rgba(239, 68, 68, 0.4)',
+                      borderRadius: '8px',
+                      padding: '10px 12px',
+                      marginTop: '8px',
+                    }}
+                  >
+                    <p style={{ margin: 0 }}>{errorMsg}</p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '8px' }}>
+                      <a
+                        href={`${HUB_URL}/login?email=${encodeURIComponent(email.trim())}`}
+                        style={{ color: '#67E8F9', fontWeight: 700 }}
+                      >
+                        Acessar minha conta
+                      </a>
+                      <a
+                        href="https://wa.me/5511966381915?text=Ol%C3%A1%2C%20j%C3%A1%20possuo%20cadastro%20no%20Agillex%20e%20preciso%20de%20ajuda%20para%20acessar."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#67E8F9', fontWeight: 700 }}
+                      >
+                        Falar com suporte
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -248,7 +300,7 @@ export default function TrialModal({ isOpen, onClose, initialProduct, initialPla
                 <span>14 dias grátis de {currentPlan.name}, sem cartão de crédito. A senha de acesso chega no seu WhatsApp.</span>
               </div>
 
-              {errorMsg && (
+              {errorMsg && !accountExists && (
                 <div role="alert" style={{ fontSize: '0.82rem', color: '#FCA5A5', backgroundColor: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.4)', borderRadius: '8px', padding: '10px 12px' }}>
                   {errorMsg}
                 </div>
