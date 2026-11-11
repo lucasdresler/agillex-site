@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'Cobrança Pix Asaas',
     'AllLogic Online'
   ],
-  authors: [{ name: 'AllLogic Online', url: 'https://alllogiconline.com.br' }],
+  authors: [{ name: 'AllLogic Online', url: 'https://agillex.com.br' }],
   openGraph: {
     title: 'Agillex | Soluções Digitais Inteligentes',
     description: 'Transforme a operação da sua empresa com inteligência artificial, automação de agendamentos e atendimento 24/7.',

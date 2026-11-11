@@ -24,7 +24,7 @@ export const privacidadeContent = {
       items: [
         "E-mail do DPO / Privacidade: contato@alllogiconline.com.br",
         "WhatsApp oficial de atendimento: (11) 96638-1915",
-        "Portal oficial: https://agillex.com.br e https://alllogiconline.com.br",
+        "Portal oficial: https://agillex.com.br",
       ],
     },
     {
