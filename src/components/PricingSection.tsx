@@ -14,9 +14,11 @@ import {
   Star,
   FileText,
 } from 'lucide-react';
+import { parseTrialUrl } from '@/content/trialPlans';
+import type { TrialProductId } from '@/content/trialPlans';
 
 interface PricingSectionProps {
-  onOpenTrial: () => void;
+  onOpenTrial: (product?: TrialProductId, plan?: string) => void;
 }
 
 export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
@@ -825,28 +827,63 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
                 </div>
 
                 {/* BOTÃO CTA */}
-                <a
-                  href={plan.checkoutUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={plan.popular ? 'cyber-button-primary' : 'cyber-button-secondary'}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    padding: '14px 20px',
-                    borderRadius: '12px',
-                    fontWeight: 700,
-                    fontSize: '0.92rem',
-                    textDecoration: 'none',
-                    marginBottom: '26px',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <span>{plan.cta}</span>
-                  <ArrowRight size={16} />
-                </a>
+                {(() => {
+                  const trial = parseTrialUrl(plan.checkoutUrl);
+                  const ctaContent = (
+                    <>
+                      <span>{plan.cta}</span>
+                      <ArrowRight size={16} />
+                    </>
+                  );
+                  // Planos com teste grátis abrem o cadastro; os demais seguem para o contato comercial
+                  return trial ? (
+                    <button
+                      type="button"
+                      onClick={() => onOpenTrial(trial.product, trial.plan)}
+                      className={plan.popular ? 'cyber-button-primary' : 'cyber-button-secondary'}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        padding: '14px 20px',
+                        borderRadius: '12px',
+                        fontWeight: 700,
+                        fontSize: '0.92rem',
+                        textDecoration: 'none',
+                        width: '100%',
+                        cursor: 'pointer',
+                        fontFamily: 'inherit',
+                        marginBottom: '26px',
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      {ctaContent}
+                    </button>
+                  ) : (
+                    <a
+                      href={plan.checkoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={plan.popular ? 'cyber-button-primary' : 'cyber-button-secondary'}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        padding: '14px 20px',
+                        borderRadius: '12px',
+                        fontWeight: 700,
+                        fontSize: '0.92rem',
+                        textDecoration: 'none',
+                        marginBottom: '26px',
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      {ctaContent}
+                    </a>
+                  );
+                })()}
 
                 {/* LISTA DE BENEFÍCIOS */}
                 <div style={{ marginTop: 'auto' }}>
@@ -920,7 +957,7 @@ export default function PricingSection({ onOpenTrial }: PricingSectionProps) {
               </div>
             </div>
             <button
-              onClick={onOpenTrial}
+              onClick={() => onOpenTrial()}
               className="cyber-button-secondary shine-hover"
               style={{
                 padding: '10px 22px',

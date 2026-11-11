@@ -14,6 +14,7 @@ import TrialModal from '@/components/TrialModal';
 import BackToTop from '@/components/BackToTop';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CookieConsent from '@/components/CookieConsent';
+import type { TrialProductId } from '@/content/trialPlans';
 
 export default function Home() {
   const [trialOpen, setTrialOpen] = useState(false);
@@ -21,9 +22,15 @@ export default function Home() {
     'atende' | 'hub' | 'agenda' | 'cobranca' | 'reputacao' | 'ged'
   >('agenda');
 
-  const handleOpenTrial = () => {
+  const [trialSelection, setTrialSelection] = useState<{ product?: TrialProductId; plan?: string }>({});
+
+  // Abre o cadastro de teste grátis, opcionalmente já com produto/plano escolhidos
+  const handleOpenTrial = (product?: TrialProductId, plan?: string) => {
+    setTrialSelection({ product, plan });
     setTrialOpen(true);
   };
+
+  const handleOpenGenericTrial = () => handleOpenTrial();
 
   const handleCloseTrial = () => {
     setTrialOpen(false);
@@ -48,29 +55,34 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#060B18', color: '#fff', position: 'relative' }}>
-      <Navbar onOpenTrial={handleOpenTrial} />
-      <Hero onOpenTrial={handleOpenTrial} onExploreProducts={handleExploreProducts} />
+      <Navbar onOpenTrial={handleOpenGenericTrial} />
+      <Hero onOpenTrial={handleOpenGenericTrial} onExploreProducts={handleExploreProducts} />
       <ProductsOverviewTable
         onSelectProduct={handleSelectProduct}
-        onOpenTrial={handleOpenTrial}
+        onOpenTrial={handleOpenGenericTrial}
       />
       <TransformationSection
-        onOpenTrial={handleOpenTrial}
+        onOpenTrial={handleOpenGenericTrial}
         onSelectProduct={handleSelectProduct}
       />
       <ProductNavigator
         activeTab={activeProductTab}
         onTabChange={setActiveProductTab}
-        onOpenTrial={handleOpenTrial}
+        onOpenTrial={() => handleOpenTrial(activeProductTab)}
       />
-      <RoiCalculator onOpenTrial={handleOpenTrial} />
+      <RoiCalculator onOpenTrial={handleOpenGenericTrial} />
       <PricingSection onOpenTrial={handleOpenTrial} />
       <FaqSection />
       <Footer />
       <BackToTop />
       <FloatingWhatsApp />
       <CookieConsent />
-      <TrialModal isOpen={trialOpen} onClose={handleCloseTrial} />
+      <TrialModal
+        isOpen={trialOpen}
+        onClose={handleCloseTrial}
+        initialProduct={trialSelection.product}
+        initialPlan={trialSelection.plan}
+      />
     </main>
   );
 }

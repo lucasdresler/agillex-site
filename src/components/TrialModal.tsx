@@ -1,43 +1,103 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Sparkles, Check, ArrowRight, ShieldCheck, Loader2 } from 'lucide-react';
+import { TRIAL_PRODUCTS, TrialProductId } from '@/content/trialPlans';
 
 interface TrialModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialProduct?: TrialProductId;
+  initialPlan?: string;
 }
 
-export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
+const HUB_URL = 'https://hub.agillex.com.br';
+
+const fieldStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '10px 14px',
+  borderRadius: '8px',
+  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  border: '1px solid rgba(255, 255, 255, 0.15)',
+  color: '#fff',
+  fontSize: '0.88rem',
+};
+
+const selectStyle: React.CSSProperties = { ...fieldStyle, backgroundColor: '#0F172A' };
+
+const labelStyle: React.CSSProperties = {
+  fontSize: '0.78rem',
+  color: '#CBD5E1',
+  display: 'block',
+  marginBottom: '4px',
+};
+
+export default function TrialModal({ isOpen, onClose, initialProduct, initialPlan }: TrialModalProps) {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
-  const [segment, setSegment] = useState('Odontologia / Saúde');
+  const [email, setEmail] = useState('');
+  const [productId, setProductId] = useState<TrialProductId>('hub');
+  const [planId, setPlanId] = useState('combo');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [success, setSuccess] = useState(false);
+
+  // Ao abrir, pré-seleciona o produto/variante do CTA que foi clicado
+  useEffect(() => {
+    if (!isOpen) return;
+    const product = TRIAL_PRODUCTS.find((p) => p.id === initialProduct) || TRIAL_PRODUCTS[0];
+    const plan = product.plans.find((p) => p.id === initialPlan) || product.plans[0];
+    setProductId(product.id);
+    setPlanId(plan.id);
+    setErrorMsg('');
+    setSuccess(false);
+  }, [isOpen, initialProduct, initialPlan]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const currentProduct = TRIAL_PRODUCTS.find((p) => p.id === productId) || TRIAL_PRODUCTS[0];
+  const currentPlan = currentProduct.plans.find((p) => p.id === planId) || currentProduct.plans[0];
+
+  const handleProductChange = (id: TrialProductId) => {
+    const product = TRIAL_PRODUCTS.find((p) => p.id === id) || TRIAL_PRODUCTS[0];
+    setProductId(product.id);
+    setPlanId(product.plans[0].id);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg('');
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      // Cadastro do teste grátis direto no Hub: sem cartão e sem etapa de pagamento
+      const res = await fetch(`${HUB_URL}/api/checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: whatsapp,
+          companyName: company,
+          planId: currentPlan.id,
+          isTrial: true,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || 'Não foi possível concluir o cadastro. Tente novamente.');
+      }
       setSuccess(true);
-      setTimeout(() => {
-        // Redireciona diretamente para o checkout / ativação de trial do Hub
-        const params = new URLSearchParams({
-          modulo: 'combo',
-          plano: 'combo',
-          trial: 'true',
-          nome: name,
-          empresa: company,
-          tel: whatsapp,
-        });
-        window.location.href = `https://hub.agillex.com.br/checkout?${params.toString()}`;
-      }, 1500);
-    }, 1000);
+    } catch (err) {
+      setErrorMsg(
+        err instanceof Error && err.message && err.message !== 'Failed to fetch'
+          ? err.message
+          : 'Falha na conexão com o servidor. Tente novamente em instantes.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,108 +150,109 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
               <Sparkles size={16} /> Acesso Imediato sem Cartão
             </div>
             <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
-              Iniciar 14 Dias Grátis do Agillex
+              Cadastre-se e teste 14 dias grátis
             </h3>
             <p style={{ fontSize: '0.86rem', color: '#94A3B8', marginBottom: '24px' }}>
-              Preencha para configurar seu espaço na nuvem e conectar sua empresa ao WhatsApp Oficial com Inteligência Artificial.
+              Escolha o produto, preencha seus dados e receba o acesso pelo WhatsApp. Não pedimos cartão de crédito.
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
-                <label style={{ fontSize: '0.78rem', color: '#CBD5E1', display: 'block', marginBottom: '4px' }}>
-                  Seu Nome Completo *
-                </label>
+                <label htmlFor="trial-product" style={labelStyle}>Produto que deseja testar *</label>
+                <select
+                  id="trial-product"
+                  value={productId}
+                  onChange={(e) => handleProductChange(e.target.value as TrialProductId)}
+                  style={selectStyle}
+                >
+                  {TRIAL_PRODUCTS.map((product) => (
+                    <option key={product.id} value={product.id}>{product.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {currentProduct.plans.length > 1 && (
+                <div>
+                  <label htmlFor="trial-plan" style={labelStyle}>Plano *</label>
+                  <select
+                    id="trial-plan"
+                    value={currentPlan.id}
+                    onChange={(e) => setPlanId(e.target.value)}
+                    style={selectStyle}
+                  >
+                    {currentProduct.plans.map((plan) => (
+                      <option key={plan.id} value={plan.id}>{plan.name}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div>
+                <label htmlFor="trial-name" style={labelStyle}>Seu nome completo *</label>
                 <input
+                  id="trial-name"
                   type="text"
                   required
+                  autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ex: Dra. Camila Castro"
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '8px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: '#fff',
-                    fontSize: '0.88rem',
-                  }}
+                  placeholder="Ex: Camila Castro"
+                  style={fieldStyle}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: '0.78rem', color: '#CBD5E1', display: 'block', marginBottom: '4px' }}>
-                  Nome da Empresa / Clínica *
-                </label>
+                <label htmlFor="trial-company" style={labelStyle}>Nome da empresa *</label>
                 <input
+                  id="trial-company"
                   type="text"
                   required
+                  autoComplete="organization"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  placeholder="Ex: Clínica Sorriso"
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '8px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: '#fff',
-                    fontSize: '0.88rem',
-                  }}
+                  placeholder="Ex: Castro Serviços"
+                  style={fieldStyle}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: '0.78rem', color: '#CBD5E1', display: 'block', marginBottom: '4px' }}>
-                  WhatsApp com DDD *
-                </label>
+                <label htmlFor="trial-email" style={labelStyle}>E-mail *</label>
                 <input
+                  id="trial-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="voce@empresa.com.br"
+                  style={fieldStyle}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="trial-whatsapp" style={labelStyle}>WhatsApp com DDD *</label>
+                <input
+                  id="trial-whatsapp"
                   type="tel"
                   required
+                  autoComplete="tel"
                   value={whatsapp}
                   onChange={(e) => setWhatsapp(e.target.value)}
                   placeholder="(11) 99999-9999"
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '8px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: '#fff',
-                    fontSize: '0.88rem',
-                  }}
+                  style={fieldStyle}
                 />
-              </div>
-
-              <div>
-                <label style={{ fontSize: '0.78rem', color: '#CBD5E1', display: 'block', marginBottom: '4px' }}>
-                  Segmento de Atuação
-                </label>
-                <select
-                  value={segment}
-                  onChange={(e) => setSegment(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '8px',
-                    backgroundColor: '#0F172A',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: '#fff',
-                    fontSize: '0.88rem',
-                  }}
-                >
-                  <option value="Odontologia / Saúde">Clínica Odontológica / Saúde</option>
-                  <option value="Estética e Beleza">Clínica de Estética / Salão</option>
-                  <option value="Escritório Contábil / Jurídico">Escritório Contábil ou Jurídico</option>
-                  <option value="Consultoria / Serviços">Empresa de Consultoria e Serviços</option>
-                  <option value="Outro">Outro Ramo</option>
-                </select>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem', color: '#94A3B8', marginTop: '6px' }}>
                 <ShieldCheck size={16} color="#00F5D4" />
-                <span>14 dias grátis com acesso total aos 6 módulos da Família Agillex.</span>
+                <span>14 dias grátis de {currentPlan.name}, sem cartão de crédito. A senha de acesso chega no seu WhatsApp.</span>
               </div>
+
+              {errorMsg && (
+                <div role="alert" style={{ fontSize: '0.82rem', color: '#FCA5A5', backgroundColor: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.4)', borderRadius: '8px', padding: '10px 12px' }}>
+                  {errorMsg}
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -200,7 +261,7 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
                 style={{ width: '100%', justifyContent: 'center', marginTop: '8px', padding: '14px' }}
               >
                 {loading ? <Loader2 size={18} className="spin-slow" /> : <Sparkles size={18} />}
-                {loading ? 'Configurando Espaço...' : 'Ativar Meus 14 Dias Grátis'}
+                {loading ? 'Criando seu acesso...' : 'Ativar Meus 14 Dias Grátis'}
               </button>
             </form>
           </div>
@@ -210,12 +271,19 @@ export default function TrialModal({ isOpen, onClose }: TrialModalProps) {
               <Check size={32} />
             </div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
-              Vamos concluir seu cadastro!
+              Teste grátis ativado!
             </h3>
             <p style={{ fontSize: '0.9rem', color: '#94A3B8', marginBottom: '20px' }}>
-              Redirecionando você para informar seu e-mail e finalizar a ativação do teste grátis, sem cartão.
+              Seus 14 dias de <strong style={{ color: '#fff' }}>{currentPlan.name}</strong> já estão valendo. Enviamos a senha provisória para o WhatsApp informado.
             </p>
-            <Loader2 size={24} className="spin-slow" style={{ color: '#00F5D4', margin: '0 auto' }} />
+            <a
+              href={`${HUB_URL}/login?email=${encodeURIComponent(email)}`}
+              className="btn-primary-neon"
+              style={{ display: 'inline-flex', justifyContent: 'center', padding: '14px 24px', textDecoration: 'none' }}
+            >
+              Fazer login no Agillex Hub
+              <ArrowRight size={18} />
+            </a>
           </div>
         )}
       </div>
